@@ -2,4 +2,4 @@
 
 ### Don't sell your users! Private storage without cookies.
 
-Mircurius is an open source package for Laravel with which you can easily collect visitor analytics.
+Mircurius is an open-source package for Laravel with which you can easily collect visitor analytics.
