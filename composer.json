@@ -1,0 +1,29 @@
+{
+    "name": "mircurius/mircurius",
+    "description": "Easy and open-source website analytics tool for Laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandr Chernyaev",
+            "email": "bliz48rus@gmail.com",
+            "homepage": "https://tabuna.github.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "ext-redis": "*",
+        "ext-pcntl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mircurius\\Analytics\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mircurius\\Analytics\\MircuriusServiceProvider"
+            ]
+        }
+    }
+}
