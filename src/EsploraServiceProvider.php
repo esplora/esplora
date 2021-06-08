@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Mircurius\Analytics;
+namespace Esplora\Analytics;
 
 use Illuminate\Support\ServiceProvider;
-use Mircurius\Analytics\Commands\Clear;
-use Mircurius\Analytics\Commands\Subscribe;
+use Esplora\Analytics\Commands\Clear;
+use Esplora\Analytics\Commands\Subscribe;
 
-class MircuriusServiceProvider extends ServiceProvider
+class EsploraServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -28,7 +28,7 @@ class MircuriusServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/mircurius.php' => config_path('mircurius.php'),
+            __DIR__ . '/../config/Esplora.php' => config_path('esplora.php'),
         ], 'config');
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');

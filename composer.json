@@ -1,5 +1,5 @@
 {
-    "name": "mircurius/mircurius",
+    "name": "esplora/esplora",
     "description": "Easy and open-source website analytics tool for Laravel",
     "license": "MIT",
     "authors": [
@@ -16,13 +16,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Mircurius\\Analytics\\": "src/"
+            "Esplora\\Analytics\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Mircurius\\Analytics\\MircuriusServiceProvider"
+                "Esplora\\Analytics\\EsploraServiceProvider"
             ]
         }
     }

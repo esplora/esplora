@@ -1,22 +1,23 @@
 <?php
 
-declare(ticks=1, strict_types=1);
+declare(strict_types=1);
 
-namespace Mircurius\Analytics\Commands;
+namespace Esplora\Analytics\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redis;
-use Mircurius\Analytics\Models\Visit;
+use Esplora\Analytics\Esplora;
+use Esplora\Analytics\Models\Visit;
+use Symfony\Component\Console\Command\SignalableCommandInterface;
 
-class Subscribe extends Command
+class Subscribe extends Command implements SignalableCommandInterface
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'mircurius:subscribe';
+    protected $signature = 'Esplora:subscribe';
 
     /**
      * The console command description.
@@ -38,38 +39,37 @@ class Subscribe extends Command
      */
     public function handle()
     {
-        $this->registerSignalHandler();
-        $this->registerRedisHandler();
+        Esplora::redis()->subscribe(Esplora::VISITS_CHANNEL, function ($message) {
+            $this->batch[] = json_decode($message, true, 512, JSON_THROW_ON_ERROR);
+
+            if (count($this->batch) > config('esplora.batch')) {
+                $this->saveVisits();
+            }
+        });
 
         return 0;
     }
 
     /**
+     * Get the list of signals handled by the command.
      *
+     * @return array
      */
-    protected function registerSignalHandler(): void
+    public function getSubscribedSignals(): array
     {
-        $signalHandler = function () {
-            $this->saveVisits();
-        };
-
-        pcntl_signal(SIGTERM, $signalHandler);
-        pcntl_signal(SIGHUP, $signalHandler);
-        pcntl_signal(SIGUSR1, $signalHandler);
+        return [SIGINT, SIGTERM, SIGHUP, SIGUSR1];
     }
 
     /**
-     * @throws \JsonException
+     * Handle an incoming signal.
+     *
+     * @param int $signal
+     *
+     * @return void
      */
-    protected function registerRedisHandler(): void
+    public function handleSignal(int $signal): void
     {
-        Redis::subscribe('visits-channel', function ($message) {
-            $this->batch[] = json_decode($message, true, 512, JSON_THROW_ON_ERROR);
-
-            if (count($this->batch) > 10) {
-                $this->saveVisits();
-            }
-        });
+        $this->saveVisits();
     }
 
     /**

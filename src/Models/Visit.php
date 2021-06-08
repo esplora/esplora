@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mircurius\Analytics\Models;
+namespace Esplora\Analytics\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

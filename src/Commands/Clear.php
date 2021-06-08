@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Mircurius\Analytics\Commands;
+namespace Esplora\Analytics\Commands;
 
 use Illuminate\Console\Command;
-use Mircurius\Analytics\Models\Visit;
+use Esplora\Analytics\Models\Visit;
 
 class Clear extends Command
 {
@@ -14,7 +14,7 @@ class Clear extends Command
      *
      * @var string
      */
-    protected $signature = 'mircurius:clear';
+    protected $signature = 'Esplora:clear';
 
     /**
      * The console command description.

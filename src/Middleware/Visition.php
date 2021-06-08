@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Mircurius\Analytics\Middleware;
+namespace Esplora\Analytics\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
-use Mircurius\Analytics\Models\Visit;
+use Esplora\Analytics\Esplora;
+use Esplora\Analytics\Models\Visit;
 
 class Visition
 {
@@ -23,7 +23,9 @@ class Visition
      */
     public function handle(Request $request, Closure $next)
     {
-        $this->boot($request);
+        if ($request->isMethod(Request::METHOD_GET)) {
+            $this->boot($request);
+        }
 
         return $next($request);
     }
@@ -35,11 +37,11 @@ class Visition
      */
     protected function loadVisitId(Store $session): string
     {
-        if ($session->has('mircurius.id')) {
-            return $session->get('mircurius.id');
+        if ($session->has('Esplora.id')) {
+            return $session->get(Esplora::ID_SESSION);
         }
 
-        return tap(Str::uuid(), fn($id) => $session->put('mircurius.id', $id));
+        return tap(Str::uuid(), fn(string $id) => $session->put(Esplora::ID_SESSION, $id));
     }
 
     /**
@@ -47,10 +49,6 @@ class Visition
      */
     protected function boot(Request $request): void
     {
-        if (!$request->isMethod(Request::METHOD_GET)) {
-            return;
-        }
-
         $visitor = new Visit([
             'id'         => $this->loadVisitId($request->session()),
             'user_id'    => $request->user(),
@@ -61,7 +59,7 @@ class Visition
             'created_at' => now(),
         ]);
 
-        dispatch(fn() => Redis::publish('visits-channel', $visitor->toJson()))
+        dispatch(fn() => Esplora::redis()->publish(Esplora::VISITS_CHANNEL, $visitor->toJson()))
             ->afterResponse();
     }
 }
