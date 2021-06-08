@@ -1,6 +1,6 @@
 # <img src=".github/logo.svg?sanitize=true" width="24" height="24" alt="Esplora"> Esplora
 
-### Don't sell your users! Use your own private storage analytics
+### Don't sell your users! Use your own private analytics
 
 Esplora is an open-source package for Laravel with which you can easily collect visitor analytics.
 
