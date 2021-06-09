@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Esplora\Analytics\Commands;
 
-use Illuminate\Console\Command;
 use Esplora\Analytics\Models\Visit;
+use Illuminate\Console\Command;
 
 class Clear extends Command
 {
@@ -26,8 +26,9 @@ class Clear extends Command
     /**
      * Execute the console command.
      *
-     * @return mixed
      * @throws \JsonException
+     *
+     * @return mixed
      */
     public function handle()
     {

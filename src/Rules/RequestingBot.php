@@ -19,6 +19,6 @@ class RequestingBot implements Rule
     {
         $agent = new Agent();
 
-        return !$agent->isRobot();
+        return ! $agent->isRobot();
     }
 }

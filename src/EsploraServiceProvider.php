@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Esplora\Analytics;
 
-use Illuminate\Support\ServiceProvider;
 use Esplora\Analytics\Commands\Clear;
 use Esplora\Analytics\Commands\Subscribe;
+use Illuminate\Support\ServiceProvider;
 
 class EsploraServiceProvider extends ServiceProvider
 {
@@ -31,7 +31,7 @@ class EsploraServiceProvider extends ServiceProvider
             __DIR__ . '/../config/Esplora.php' => config_path('esplora.php'),
         ], 'config');
 
-        $this->mergeConfigFrom( __DIR__ . '/../config/Esplora.php', 'esplora');
+        $this->mergeConfigFrom(__DIR__ . '/../config/Esplora.php', 'esplora');
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
