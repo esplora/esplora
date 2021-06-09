@@ -34,8 +34,9 @@ class Subscribe extends Command implements SignalableCommandInterface
     /**
      * Execute the console command.
      *
-     * @return mixed
      * @throws \JsonException
+     *
+     * @return mixed
      */
     public function handle()
     {
@@ -87,5 +88,4 @@ class Subscribe extends Command implements SignalableCommandInterface
             $this->batch = [];
         }
     }
-
 }

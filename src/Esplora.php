@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Esplora\Analytics;
 
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Redis\Connections\Connection;
+use Illuminate\Support\Facades\Redis;
 
 class Esplora
 {

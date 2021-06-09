@@ -14,7 +14,6 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Ramsey\Uuid\Rfc4122\UuidV4;
 
-
 class Tracking
 {
     /**
@@ -28,9 +27,9 @@ class Tracking
     public function handle(Request $request, Closure $next)
     {
         $needWrite = collect(config('esplora.rules'))
-            ->map(fn(string $class) => app()->make($class))
-            ->map(fn(Rule $rule) => $rule->passes($request))
-            ->filter(fn(bool $result) => $result === false)
+            ->map(fn (string $class)   => app()->make($class))
+            ->map(fn (Rule $rule)      => $rule->passes($request))
+            ->filter(fn (bool $result) => $result === false)
             ->isEmpty();
 
         if ($needWrite) {
@@ -49,7 +48,7 @@ class Tracking
     {
         $id = Str::orderedUuid();
 
-        return $session->remember(Esplora::ID_SESSION, fn() => $id);
+        return $session->remember(Esplora::ID_SESSION, fn () => $id);
     }
 
     /**
@@ -69,6 +68,7 @@ class Tracking
 
         if (config('esplora.filling', 'sync') === 'sync') {
             $this->fillingSync($transfer);
+
             return;
         }
 
@@ -90,7 +90,7 @@ class Tracking
      */
     public function fillingRedis(Collection $transfer): void
     {
-        dispatch(fn() => Esplora::redis()->publish(Esplora::VISITS_CHANNEL, $transfer->toJson()))
+        dispatch(fn () => Esplora::redis()->publish(Esplora::VISITS_CHANNEL, $transfer->toJson()))
             ->afterResponse();
     }
 }
