@@ -17,6 +17,21 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Rules
+    |--------------------------------------------------------------------------
+    |
+    | ...
+    |
+    */
+
+    'rules' => [
+        \Esplora\Analytics\Rules\RequestingRepresentation::class,
+        \Esplora\Analytics\Rules\RequestingDuplicate::class,
+        \Esplora\Analytics\Rules\RequestingBot::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Batch Insertion
     |--------------------------------------------------------------------------
     |

@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Esplora\Analytics\Middleware;
 
 use Closure;
+use Esplora\Analytics\Contracts\Rule;
 use Esplora\Analytics\Esplora;
 use Esplora\Analytics\Models\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Session\Store;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Ramsey\Uuid\Rfc4122\UuidV4;
 
 
 class Tracking
@@ -25,7 +27,13 @@ class Tracking
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->isMethod(Request::METHOD_GET)) {
+        $needWrite = collect(config('esplora.rules'))
+            ->map(fn(string $class) => app()->make($class))
+            ->map(fn(Rule $rule) => $rule->passes($request))
+            ->filter(fn(bool $result) => $result === false)
+            ->isEmpty();
+
+        if ($needWrite) {
             $this->boot($request);
         }
 
@@ -35,9 +43,9 @@ class Tracking
     /**
      * @param Store $session
      *
-     * @return string
+     * @return UuidV4
      */
-    protected function loadVisitId(Store $session): string
+    protected function loadVisitId(Store $session): UuidV4
     {
         $id = Str::orderedUuid();
 
