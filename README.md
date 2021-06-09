@@ -11,6 +11,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed eleifend erat
 pellentesque a non mauris. Aliquam sit amet lacus aliquet, finibus metus sit amet, mollis nibh.
 
 
+After the client has received a useful response from the server, we process his request by collecting the following information:
+
+- URL
+- IP 
+- Device (Mobile, Desktop, Tablet, Robot)
+- Platform (Ubuntu, Windows, OS X)
+- Browser (Chrome, IE, Safari, Firefox)
+- Preferred Language
+- Referer
+
 ## Installation
 
 You may install Esplora into your project using the Composer package manager:
