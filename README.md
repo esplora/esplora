@@ -4,14 +4,9 @@
 
 Esplora is an open-source package for Laravel with which you can easily collect visitor analytics.
 
-
 ## How It Works
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed eleifend erat. Suspendisse non velit et sem dignissim
-pellentesque a non mauris. Aliquam sit amet lacus aliquet, finibus metus sit amet, mollis nibh.
-
-
-After the client has received a useful response from the server, we process his request by collecting the following information:
+After the client has received a useful response from the server, we process his request by collecting and write to the database the following information:
 
 - URL
 - IP 
