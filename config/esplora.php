@@ -4,15 +4,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Esplora Redis Connection
+    | Aggregate filling
     |--------------------------------------------------------------------------
     |
-    | This is the name of the Redis connection where Esplora will store the
-    | meta information required for it to function.
+    | ...
+    |
+    | Supported: "sync", "redis"
     |
     */
 
-    'use' => 'default',
+    'filling' => 'sync',
 
     /*
     |--------------------------------------------------------------------------
@@ -23,11 +24,24 @@ return [
     |
     */
 
-    'batch' => 200,
+    'batch' => 1,
+
 
     /*
     |--------------------------------------------------------------------------
-    | Database prefix
+    | Redis Connection
+    |--------------------------------------------------------------------------
+    |
+    | This is the name of the Redis connection where Esplora will store the
+    | meta information required for it to function.
+    |
+    */
+
+    'redis' => 'default',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Database Connection
     |--------------------------------------------------------------------------
     |
     | Вy default Esplora does not use a prefix to create new columns in
@@ -37,6 +51,6 @@ return [
     |
     */
 
-    'prefix' => '',
+    'database' => env('DB_CONNECTION', 'mysql'),
 
 ];

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Esplora\Analytics;
 
 use Illuminate\Support\Facades\Redis;
-use Illuminate\Redis\RedisManager;
+use Illuminate\Redis\Connections\Connection;
 
 class Esplora
 {
@@ -20,10 +20,10 @@ class Esplora
     public const ID_SESSION = 'esplora.id';
 
     /**
-     * @return RedisManager
+     * @return Connection
      */
-    public static function redis(): RedisManager
+    public static function redis(): Connection
     {
-        return Redis::connection(config('esplora.use'));
+        return Redis::connection(config('esplora.redis'));
     }
 }

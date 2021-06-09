@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Esplora\Analytics\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 use Esplora\Analytics\Esplora;
 use Esplora\Analytics\Models\Visit;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Command\SignalableCommandInterface;
 
 class Subscribe extends Command implements SignalableCommandInterface
@@ -17,7 +17,7 @@ class Subscribe extends Command implements SignalableCommandInterface
      *
      * @var string
      */
-    protected $signature = 'Esplora:subscribe';
+    protected $signature = 'esplora:subscribe';
 
     /**
      * The console command description.
@@ -40,7 +40,9 @@ class Subscribe extends Command implements SignalableCommandInterface
     public function handle()
     {
         Esplora::redis()->subscribe(Esplora::VISITS_CHANNEL, function ($message) {
-            $this->batch[] = json_decode($message, true, 512, JSON_THROW_ON_ERROR);
+            $data = json_decode($message, true, 512, JSON_THROW_ON_ERROR);
+
+            $this->batch[] = (new Visit($data))->toArray();
 
             if (count($this->batch) > config('esplora.batch')) {
                 $this->saveVisits();

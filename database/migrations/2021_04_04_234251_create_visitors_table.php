@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVisitsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,20 @@ class CreateVisitsTable extends Migration
      */
     public function up()
     {
-        Schema::create('visits', function (Blueprint $table) {
-            $table->char('id');
-            $table->char('user_id')->nullable();
-            $table->string('ip', 40);
-            $table->text('referer')->nullable();
-            $table->string('user_agent')->nullable();
+        Schema::connection(config('esplora.connection'))->create('visits', function (Blueprint $table) {
+            $table->string('id');
+
             $table->string('url')->nullable();
-            $table->timestamp('created_at')->nullable();
+            $table->string('ip', 40);
+
+            $table->string('device')->nullable();   // Mobile, Desktop, Tablet, Robot
+            $table->string('platform')->nullable(); // Ubuntu, Windows, OS X
+            $table->string('browser')->nullable();  // Chrome, IE, Safari, Firefox,
+            $table->string('preferred_language')->nullable(); // en/jp/ru/de
+
+            $table->string('referer')->nullable();
+
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 
@@ -33,4 +39,4 @@ class CreateVisitsTable extends Migration
     {
         Schema::dropIfExists('visits');
     }
-}
+};

@@ -14,7 +14,7 @@ class Clear extends Command
      *
      * @var string
      */
-    protected $signature = 'Esplora:clear';
+    protected $signature = 'esplora:clear';
 
     /**
      * The console command description.

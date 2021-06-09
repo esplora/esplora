@@ -7,11 +7,56 @@ Esplora is an open-source package for Laravel with which you can easily collect 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sed eleifend erat. Suspendisse non velit et sem dignissim
 pellentesque a non mauris. Aliquam sit amet lacus aliquet, finibus metus sit amet, mollis nibh.
 
-How does it work? Add middleware to a group or for a specific route:
+
+## Installation
+
+You may install Esplora into your project using the Composer package manager:
+
+```bash
+composer require esplora/esplora
+```
+
+Next, you should publish the Esplora configuration and migration files using the `vendor:publish` Artisan command. The `esplora.php` configuration file will be placed in your application's `config` directory:
+
+```bash
+php artisan vendor:publish --provider="Esplora\Analytics\EsploraServiceProvider.php"
+```
+
+Finally, you should run your database migrations. Esplora will create  database tables in which to store users visits:
+
+```bash
+php artisan migrate
+```
+
+Next, if you plan to utilize Esplora to tracking web requests, you should add middleware to your `web` middleware group within your application's `app/Http/Kernel.php` file:
 
 ```php
-//...
+'web' => [
+    \App\Http\Middleware\EncryptCookies::class,
+    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+    \Illuminate\Session\Middleware\StartSession::class,
+    // \Illuminate\Session\Middleware\AuthenticateSession::class,
+    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    \App\Http\Middleware\VerifyCsrfToken::class,
+    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    
+    //new Esplora:
+    \Esplora\Analytics\Middleware\Tracking::class,
+],
 ```
+
+## Configuration
+
+//...
+
+## Running Esplora
+
+//...
+
+```bash
+php artisan esplora:subscribe
+```
+
 
 ## License
 
