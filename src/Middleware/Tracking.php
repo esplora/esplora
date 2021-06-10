@@ -51,7 +51,6 @@ class Tracking
         return $next($request);
     }
 
-
     /**
      * @param Request $request
      */

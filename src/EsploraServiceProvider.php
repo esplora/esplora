@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Esplora\Analytics;
 
-use Esplora\Analytics\Commands\Clear;
 use Esplora\Analytics\Commands\Subscribe;
 use Illuminate\Support\ServiceProvider;
 
