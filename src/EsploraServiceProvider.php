@@ -38,7 +38,6 @@ class EsploraServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Subscribe::class,
-                Clear::class,
             ]);
         }
     }

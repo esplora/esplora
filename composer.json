@@ -26,7 +26,10 @@
         "laravel": {
             "providers": [
                 "Esplora\\Analytics\\EsploraServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Tracker": "Esplora\\Analytics\\Facades\\Tracker"
+            }
         }
     }
 }

@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'batch' => 1,
+    'batch' => 100,
 
 
     /*

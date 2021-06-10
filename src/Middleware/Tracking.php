@@ -9,13 +9,25 @@ use Esplora\Analytics\Contracts\Rule;
 use Esplora\Analytics\Esplora;
 use Esplora\Analytics\Models\Visit;
 use Illuminate\Http\Request;
-use Illuminate\Session\Store;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
-use Ramsey\Uuid\Rfc4122\UuidV4;
 
 class Tracking
 {
+    /**
+     * @var Esplora
+     */
+    protected Esplora $esplora;
+
+    /**
+     * Tracking constructor.
+     *
+     * @param Esplora $esplora
+     */
+    public function __construct(Esplora $esplora)
+    {
+        $this->esplora = $esplora;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -39,17 +51,6 @@ class Tracking
         return $next($request);
     }
 
-    /**
-     * @param Store $session
-     *
-     * @return UuidV4
-     */
-    protected function loadVisitId(Store $session): UuidV4
-    {
-        $id = Str::orderedUuid();
-
-        return $session->remember(Esplora::ID_SESSION, fn () => $id);
-    }
 
     /**
      * @param Request $request
@@ -57,7 +58,7 @@ class Tracking
     protected function boot(Request $request): void
     {
         $transfer = collect([
-            'id'                 => $this->loadVisitId($request->session()),
+            'id'                 => $this->esplora->loadVisitId(),
             'ip'                 => $request->ip(),
             'referer'            => $request->headers->get('referer'),
             'user_agent'         => $request->userAgent(),
