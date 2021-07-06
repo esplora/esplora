@@ -67,7 +67,7 @@ php artisan esplora:subscribe
 ```
 
 
-## Goals
+## Executing Goals
 
 Goals allow you to track important events on the site: clicks on buttons, views of certain pages, downloading files, submitting forms, and many others. You can define a target as completed with a simple call:
 
