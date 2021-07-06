@@ -58,9 +58,9 @@ After publishing Esplora's assets, its primary configuration file will be locate
 
 //...
 
-## Running Esplora
+## Running service
 
-//...
+With a large number of visits, the number of `Insert` queries to the database can take up a lot of server resources. To do this, you can use a service that will insert information in batches.
 
 ```bash
 php artisan esplora:subscribe
