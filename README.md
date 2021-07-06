@@ -68,7 +68,6 @@ php artisan esplora:subscribe
 ```
 
 
-
 ## Goals
 
 Goals allow you to track important events on the site: clicks on buttons, views of certain pages, downloading files, submitting forms, and many others. You can define a target as completed with a simple call:
@@ -76,7 +75,9 @@ Goals allow you to track important events on the site: clicks on buttons, views 
 ```php
 use Esplora\Analytics\Facades\Tracker;
 
-Tracker::goal('test');
+Tracker::goal('Dark theme', [
+    'enabled' => false,
+]);
 ```
 
 

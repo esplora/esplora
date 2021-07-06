@@ -45,7 +45,7 @@ class Esplora
     {
         $id = Str::orderedUuid();
 
-        return $this->request->session()->remember(Esplora::ID_SESSION, fn () => $id);
+        return $this->request->session()->remember(Esplora::ID_SESSION, fn() => $id);
     }
 
     /**
@@ -58,13 +58,15 @@ class Esplora
 
     /**
      * @param string $name
+     * @param array  $parameters
      */
-    public function goal(string $name): void
+    public function goal(string $name, array $parameters = []): void
     {
-        dispatch(fn () => Goal::create([
+        dispatch(fn() => Goal::create([
             'id'         => Str::orderedUuid(),
             'visitor_id' => $this->loadVisitId(),
             'name'       => $name,
+            'parameters' => $parameters,
             'created_at' => now(),
         ]))
             ->afterResponse();

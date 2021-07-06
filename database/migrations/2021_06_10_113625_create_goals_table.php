@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('id');
             $table->string('visitor_id');
             $table->string('name');
+            $table->json('parameters')->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
     }

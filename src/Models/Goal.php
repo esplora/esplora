@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace Esplora\Analytics\Models;
 
@@ -33,6 +34,7 @@ class Goal extends Model
         'id',
         'visitor_id',
         'name',
+        'parameters',
         'created_at',
     ];
 
@@ -45,6 +47,7 @@ class Goal extends Model
         'id'         => 'string',
         'visitor_id' => 'string',
         'name'       => 'string',
+        'parameters' => 'array',
         'created_at' => 'timestamp',
     ];
 

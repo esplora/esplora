@@ -40,7 +40,7 @@ class Subscribe extends Command implements SignalableCommandInterface
      */
     public function handle()
     {
-        Esplora::redis()->subscribe(Esplora::VISITS_CHANNEL, function ($message) {
+        Esplora::redis()->subscribe(Esplora::VISITS_CHANNEL, function (string $message) {
             $data = json_decode($message, true, 512, JSON_THROW_ON_ERROR);
 
             $this->batch[] = (new Visit($data))->toArray();
@@ -83,7 +83,7 @@ class Subscribe extends Command implements SignalableCommandInterface
         try {
             Visit::insert($this->batch);
         } catch (\Exception $exception) {
-            Log::alert('Missing tracking batch');
+            Log::alert('Missing tracking batch:' . count($this->batch));
         } finally {
             $this->batch = [];
         }
