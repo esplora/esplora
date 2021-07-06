@@ -7,7 +7,7 @@ Esplora is an open-source package for Laravel with which you can easily collect 
 
 After the client has received a useful response from the server, we process his request by collecting and write to the database the following information:
 
-- URL
+- Requested URL
 - IP 
 - Device (Mobile, Desktop, Tablet, Robot)
 - Platform (Ubuntu, Windows, OS X)
