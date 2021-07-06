@@ -8,7 +8,7 @@ Esplora is an open-source package for Laravel with which you can easily collect 
 After the client has received a useful response from the server, we process his request by collecting and write to the database the following information:
 
 - Requested URL
-- IP 
+- IP address 
 - Device (Mobile, Desktop, Tablet, Robot)
 - Platform (Ubuntu, Windows, OS X)
 - Browser (Chrome, IE, Safari, Firefox)
@@ -60,12 +60,17 @@ After publishing Esplora's assets, its primary configuration file will be locate
 
 ## Running service
 
-With a large number of visits, the number of `Insert` queries to the database can take up a lot of server resources. To do this, you can use a service that will insert information in batches.
+With many visits, the number of `Insert` queries to the database can take up a lot of server resources. To do this, you can use a service that will insert information in batches.
 
 ```bash
 php artisan esplora:subscribe
 ```
 
+You may gracefully terminate the Esplora process using the `esplora:terminate` Artisan command. Any tracks that are currently being waited (In Batch) by will be records, and then Esplora will stop executing:
+
+```bash
+php artisan esplora:terminate
+```
 
 ## Executing Goals
 
