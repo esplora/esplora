@@ -54,7 +54,7 @@ Next, if you plan to utilize Esplora to tracking web requests, you should add mi
 
 ## Configuration
 
-After publishing Horizon's assets, its primary configuration file will be located at `config/esplora.php`. This configuration file allows you to configure the request tracking options for your application.
+After publishing Esplora's assets, its primary configuration file will be located at `config/esplora.php`. This configuration file allows you to configure the request tracking options for your application.
 
 //...
 
