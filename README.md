@@ -58,23 +58,10 @@ After publishing Esplora's assets, its primary configuration file will be locate
 
 //...
 
-## Running service
-
-With many visits, the number of `Insert` queries to the database can take up a lot of server resources. To do this, you can use a service that will insert information in batches.
-
-```bash
-php artisan esplora:subscribe
-```
-
-You may gracefully terminate the Esplora process using the `esplora:terminate` Artisan command. Any tracks that are currently being waited (In Batch) by will be records, and then Esplora will stop executing:
-
-```bash
-php artisan esplora:terminate
-```
-
 ## Executing Goals
 
-Goals allow you to track important events on the site: clicks on buttons, views of certain pages, downloading files, submitting forms, and many others. You can define a target as completed with a simple call:
+Goals allow you to track important events on the site: clicks on buttons, views of certain pages, downloading files,
+submitting forms, and many others. You can define a target as completed with a simple call:
 
 ```php
 use Esplora\Analytics\Facades\Tracker;
@@ -84,6 +71,21 @@ Tracker::goal('Dark theme', [
 ]);
 ```
 
+## Running service
+
+With many visits, the number of `Insert` queries to the database can take up a lot of server resources. To do this, you
+can use an intermediate Redis store, from which information will then be inserted in batches.
+
+```bash
+php artisan esplora:insert
+```
+
+You may define the time of recording to permanent storage using a schedule of scheduled tasks in the `schedule` method
+of your application's `App\Console\Kernel` class. For example, every 10 minutes:
+
+```php
+$schedule->command('esplora:insert')->everyTenMinutes();
+```
 
 ## License
 
