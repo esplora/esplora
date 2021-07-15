@@ -17,9 +17,19 @@
         "laravel/framework": "^8.32",
         "jenssegers/agent": "^2.6"
     },
+    "require-dev": {
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "^9.0",
+        "orchestra/testbench-core": "^6.2"
+    },
     "autoload": {
         "psr-4": {
             "Esplora\\Analytics\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Esplora\\Analytics\\Tests\\": "tests/"
         }
     },
     "extra": {

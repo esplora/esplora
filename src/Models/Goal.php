@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Esplora\Analytics\Models;
 
+use Database\Factories\GoalFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +25,11 @@ class Goal extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * @var string
+     */
+    protected $table = 'esplora_goals';
 
     /**
      * The attributes that are mass assignable.
@@ -59,5 +65,15 @@ class Goal extends Model
     public function getConnectionName(): ?string
     {
         return config('esplora.connection');
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    protected static function newFactory()
+    {
+        return app()->make(GoalFactory::class);
     }
 }

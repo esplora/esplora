@@ -1,0 +1,59 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Esplora\Analytics\Commands;
+
+use Esplora\Analytics\Esplora;
+use Esplora\Analytics\Models\Goal;
+use Esplora\Analytics\Models\Visit;
+use Illuminate\Console\Command;
+
+class EventsImport extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'esplora:import';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Massively saves events from temporary storage to permanent';
+
+    /**
+     * @var Esplora
+     */
+    protected Esplora $esplora;
+
+    /**
+     * Create a new command instance.
+     *
+     * @param Esplora $esplora
+     */
+    public function __construct(Esplora $esplora)
+    {
+        $this->esplora = $esplora;
+
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $goals = $this->esplora->importModelsForRedis(Goal::class);
+        $visits = $this->esplora->importModelsForRedis(Visit::class);
+
+        $this->info("Persistent storage recorded $visits visits and $goals goals.");
+
+        return 0;
+    }
+}

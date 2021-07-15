@@ -27,6 +27,11 @@ class Visit extends Model
     public $timestamps = false;
 
     /**
+     * @var string
+     */
+    protected $table = 'esplora_visits';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var string[]

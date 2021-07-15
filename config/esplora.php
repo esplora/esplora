@@ -13,14 +13,15 @@ return [
     |
     */
 
-    'filling' => 'sync',
+    'filling' => 'redis',
 
     /*
     |--------------------------------------------------------------------------
     | Rules
     |--------------------------------------------------------------------------
     |
-    | ...
+    | You can exclude tracking, for example, if the user just refreshed
+    | the page. Or not to record visits to search engines.
     |
     */
 
@@ -29,18 +30,6 @@ return [
         \Esplora\Analytics\Rules\RequestingDuplicate::class,
         \Esplora\Analytics\Rules\RequestingBot::class,
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Batch Insertion
-    |--------------------------------------------------------------------------
-    |
-    | ...
-    |
-    */
-
-    'batch' => 100,
-
 
     /*
     |--------------------------------------------------------------------------
@@ -59,10 +48,8 @@ return [
     | Database Connection
     |--------------------------------------------------------------------------
     |
-    | Вy default Esplora does not use a prefix to create new columns in
-    | the database. However, you can add them by changing this value.
-    | This must be done before performing migrations.
-    | Otherwise, they must be rolled back.
+    | This configuration options determines the database driver that will
+    | be used to store visitor's data.
     |
     */
 

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * Class Tracker
  *
- * @method static void goal(string $name)
+ * @method static void goal(string $name, array $parameters = [])
  */
 class Tracker extends Facade
 {
