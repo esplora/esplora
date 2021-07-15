@@ -1,4 +1,4 @@
-# <img src=".github/logo.svg?sanitize=true" width="24" height="24" alt="Esplora"> Esplora - A Fast Tracker Visits
+# <img src=".github/logo.svg?sanitize=true" width="24" height="24" alt="Esplora"> Esplora - Easy Tracker Visits
 
 
 Esplora is an open-source package for Laravel with which you can easily collect visitor analytics. Don't sell your users! Use your own private storage.
