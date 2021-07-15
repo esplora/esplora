@@ -45,9 +45,9 @@ class Esplora
     public function isNeedVisitWrite(Request $request): bool
     {
         return collect(config('esplora.rules'))
-            ->map(fn(string $class) => app()->make($class))
-            ->map(fn(Rule $rule) => $rule->passes($request))
-            ->filter(fn(bool $result) => $result === false)
+            ->map(fn (string $class)   => app()->make($class))
+            ->map(fn (Rule $rule)      => $rule->passes($request))
+            ->filter(fn (bool $result) => $result === false)
             ->isEmpty();
     }
 
@@ -58,7 +58,7 @@ class Esplora
     {
         return $this->request
             ->session()
-            ->remember(Esplora::ID_SESSION, fn() => Str::orderedUuid());
+            ->remember(Esplora::ID_SESSION, fn () => Str::orderedUuid());
     }
 
     /**
@@ -112,6 +112,7 @@ class Esplora
         dispatch(function () use ($model) {
             if (config('esplora.filling', 'sync') === 'sync') {
                 $model->save();
+
                 return;
             }
 
@@ -142,7 +143,7 @@ class Esplora
 
         // get all keys
         $keys = collect($redis->keys($findKeys))
-            ->map(fn($key) => Str::of($key)->after(Esplora::REDIS_PREFIX)->start(Esplora::REDIS_PREFIX))
+            ->map(fn ($key) => Str::of($key)->after(Esplora::REDIS_PREFIX)->start(Esplora::REDIS_PREFIX))
             ->toArray();
 
         if (count($keys) === 0) {
@@ -152,8 +153,8 @@ class Esplora
         // get all values
         $values = collect()
             ->merge($redis->mGet($keys))
-            ->map(fn(string $value) => json_decode($value, true, 512, JSON_THROW_ON_ERROR))
-            ->map(fn(array $value) => collect($value)->map(fn($attr) => is_array($attr) ? json_encode($attr, JSON_THROW_ON_ERROR) : $attr))
+            ->map(fn (string $value) => json_decode($value, true, 512, JSON_THROW_ON_ERROR))
+            ->map(fn (array $value)  => collect($value)->map(fn ($attr)  => is_array($attr) ? json_encode($attr, JSON_THROW_ON_ERROR) : $attr))
             ->toArray();
 
         // save mass records

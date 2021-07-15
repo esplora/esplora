@@ -32,7 +32,6 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
             ->name('visit');
 
         Route::get('goal', function () {
-
             Tracker::goal('changeTheme', [
                 'color' => 'dark',
             ]);

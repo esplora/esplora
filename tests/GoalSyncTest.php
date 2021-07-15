@@ -8,7 +8,6 @@ use Esplora\Analytics\Models\Goal;
 
 class GoalSyncTest extends TestCase
 {
-
     /**
      *
      */

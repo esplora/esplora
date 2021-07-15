@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 
 class VisitorSyncTest extends TestCase
 {
-
     /**
      *
      */
