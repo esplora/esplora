@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Casts;
+namespace Esplora\Tracker\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Jenssegers\Agent\Agent;

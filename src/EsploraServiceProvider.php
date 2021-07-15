@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics;
+namespace Esplora\Tracker;
 
-use Esplora\Analytics\Commands\EventsImport;
+use Esplora\Tracker\Commands\EventsImport;
 use Illuminate\Support\ServiceProvider;
 
 class EsploraServiceProvider extends ServiceProvider

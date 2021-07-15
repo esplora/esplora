@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Middleware;
+namespace Esplora\Tracker\Middleware;
 
 use Closure;
-use Esplora\Analytics\Esplora;
-use Esplora\Analytics\Models\Visit;
+use Esplora\Tracker\Esplora;
+use Esplora\Tracker\Models\Visit;
 use Illuminate\Http\Request;
 
 class Tracking

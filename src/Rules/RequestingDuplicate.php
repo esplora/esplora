@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Rules;
+namespace Esplora\Tracker\Rules;
 
-use Esplora\Analytics\Contracts\Rule;
+use Esplora\Tracker\Contracts\Rule;
 use Illuminate\Http\Request;
 
 class RequestingDuplicate implements Rule

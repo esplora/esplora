@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Models;
+namespace Esplora\Tracker\Models;
 
 use Database\Factories\GoalFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

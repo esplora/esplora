@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Commands;
+namespace Esplora\Tracker\Commands;
 
-use Esplora\Analytics\Esplora;
-use Esplora\Analytics\Models\Goal;
-use Esplora\Analytics\Models\Visit;
+use Esplora\Tracker\Esplora;
+use Esplora\Tracker\Models\Goal;
+use Esplora\Tracker\Models\Visit;
 use Illuminate\Console\Command;
 
 class EventsImport extends Command

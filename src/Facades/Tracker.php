@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Facades;
+namespace Esplora\Tracker\Facades;
 
-use Esplora\Analytics\Esplora;
+use Esplora\Tracker\Esplora;
 use Illuminate\Support\Facades\Facade;
 
 /**

@@ -26,7 +26,7 @@ composer require esplora/esplora
 Next, you should publish the Esplora configuration and migration files using the `vendor:publish` Artisan command. The `esplora.php` configuration file will be placed in your application's `config` directory:
 
 ```bash
-php artisan vendor:publish --provider="Esplora\Analytics\EsploraServiceProvider.php"
+php artisan vendor:publish --provider="Esplora\Tracker\EsploraServiceProvider.php"
 ```
 
 Finally, you should run your database migrations. Esplora will create  database tables in which to store users visits:
@@ -48,13 +48,24 @@ Next, if you plan to utilize Esplora to tracking web requests, you should add mi
     \Illuminate\Routing\Middleware\SubstituteBindings::class,
     
     //new Esplora:
-    \Esplora\Analytics\Middleware\Tracking::class,
+    \Esplora\Tracker\Middleware\Tracking::class,
 ],
+```
+
+Or set for a specific route:
+
+```php
+use Esplora\Tracker\Middleware\Tracking;
+
+Route::get('about', function (){
+  // code
+})->middleware(Tracking::class);
 ```
 
 ## Configuration
 
-After publishing Esplora's assets, its primary configuration file will be located at `config/esplora.php`. This configuration file allows you to configure the request tracking options for your application.
+After publishing Esplora's assets, its primary configuration file will be located at `config/esplora.php`. This
+configuration file allows you to configure the request tracking options for your application.
 
 //...
 
@@ -64,7 +75,7 @@ Goals allow you to track important events on the site: clicks on buttons, views 
 submitting forms, and many others. You can define a target as completed with a simple call:
 
 ```php
-use Esplora\Analytics\Facades\Tracker;
+use Esplora\Tracker\Facades\Tracker;
 
 Tracker::goal('Dark theme', [
     'enabled' => false,

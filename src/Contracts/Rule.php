@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Contracts;
+namespace Esplora\Tracker\Contracts;
 
 use Illuminate\Http\Request;
 

@@ -26,9 +26,9 @@ return [
     */
 
     'rules' => [
-        \Esplora\Analytics\Rules\RequestingRepresentation::class,
-        \Esplora\Analytics\Rules\RequestingDuplicate::class,
-        \Esplora\Analytics\Rules\RequestingBot::class,
+        \Esplora\Tracker\Rules\RequestingRepresentation::class,
+        \Esplora\Tracker\Rules\RequestingDuplicate::class,
+        \Esplora\Tracker\Rules\RequestingBot::class,
     ],
 
     /*

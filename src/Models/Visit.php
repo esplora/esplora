@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Models;
+namespace Esplora\Tracker\Models;
 
-use Esplora\Analytics\Casts\UserAgent;
+use Esplora\Tracker\Casts\UserAgent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics;
+namespace Esplora\Tracker;
 
-use Esplora\Analytics\Contracts\Rule;
-use Esplora\Analytics\Models\Goal;
-use Esplora\Analytics\Models\Visit;
+use Esplora\Tracker\Contracts\Rule;
+use Esplora\Tracker\Models\Goal;
+use Esplora\Tracker\Models\Visit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Redis\Connections\Connection;

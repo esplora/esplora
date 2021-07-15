@@ -27,21 +27,21 @@
     },
     "autoload": {
         "psr-4": {
-            "Esplora\\Analytics\\": "src/"
+            "Esplora\\Tracker\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Esplora\\Analytics\\Tests\\": "tests/"
+            "Esplora\\Tracker\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Esplora\\Analytics\\EsploraServiceProvider"
+                "Esplora\\Tracker\\EsploraServiceProvider"
             ],
             "aliases": {
-                "Tracker": "Esplora\\Analytics\\Facades\\Tracker"
+                "Tracker": "Esplora\\Tracker\\Facades\\Tracker"
             }
         }
     }

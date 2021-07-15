@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Tests;
+namespace Esplora\Tracker\Tests;
 
-use Esplora\Analytics\Esplora;
-use Esplora\Analytics\Models\Visit;
+use Esplora\Tracker\Esplora;
+use Esplora\Tracker\Models\Visit;
 use Illuminate\Support\Str;
 
 class VisitorSyncTest extends TestCase

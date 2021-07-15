@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Tests;
+namespace Esplora\Tracker\Tests;
 
-use Esplora\Analytics\Models\Goal;
+use Esplora\Tracker\Models\Goal;
 
 class GoalSyncTest extends TestCase
 {

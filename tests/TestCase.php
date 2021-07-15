@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Analytics\Tests;
+namespace Esplora\Tracker\Tests;
 
-use Esplora\Analytics\Facades\Tracker;
-use Esplora\Analytics\Middleware\Tracking;
+use Esplora\Tracker\Facades\Tracker;
+use Esplora\Tracker\Middleware\Tracking;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 
