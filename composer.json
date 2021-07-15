@@ -12,15 +12,17 @@
     ],
     "require": {
         "ext-redis": "*",
-        "ext-pcntl": "*",
         "php": "^7.4|^8.0",
-        "laravel/framework": "^8.32",
+        "laravel/framework": "^8.50",
         "jenssegers/agent": "^2.6"
     },
     "require-dev": {
         "mockery/mockery": "^1.4.2",
         "phpunit/phpunit": "^9.0",
         "orchestra/testbench-core": "^6.2"
+    },
+    "conflict": {
+        "laravel/framework": "<5.50.0"
     },
     "autoload": {
         "psr-4": {
