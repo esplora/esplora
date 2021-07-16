@@ -82,7 +82,7 @@ Tracker::goal('Dark theme', [
 ]);
 ```
 
-## Running service
+## Batch Import
 
 With many visits, the number of `Insert` queries to the database can take up a lot of server resources. To do this, you
 can use an intermediate Redis store, from which information will then be inserted in batches.
