@@ -75,7 +75,7 @@ class Esplora
      */
     public function goal(string $name, array $parameters = []): void
     {
-        $this->fillingGoal(new Goal([
+        $this->saveAfterResponse(new Goal([
             'id'         => Str::orderedUuid(),
             'visitor_id' => $this->loadVisitId(),
             'name'       => $name,
@@ -85,29 +85,9 @@ class Esplora
     }
 
     /**
-     * @param Visit $visit
-     *
-     * @return void
-     */
-    public function fillingVisit(Visit $visit): void
-    {
-        $this->saveAfterResponse($visit);
-    }
-
-    /**
-     * @param Goal $goal
-     *
-     * @return void
-     */
-    public function fillingGoal(Goal $goal): void
-    {
-        $this->saveAfterResponse($goal);
-    }
-
-    /**
      * @param Model $model
      */
-    protected function saveAfterResponse(Model $model): void
+    public function saveAfterResponse(Model $model): void
     {
         dispatch(function () use ($model) {
             if (config('esplora.filling', 'sync') === 'sync') {
@@ -135,15 +115,15 @@ class Esplora
     {
         $redis = $this->redis();
 
-        $findKeys = Str::of($model)
+        $patternForSearch = Str::of($model)
             ->classBasename()
             ->start(Esplora::REDIS_PREFIX)
             ->slug()
             ->finish('*');
 
         // get all keys
-        $keys = collect($redis->keys($findKeys))
-            ->map(fn ($key) => Str::of($key)->after(Esplora::REDIS_PREFIX)->start(Esplora::REDIS_PREFIX))
+        $keys = collect($redis->keys($patternForSearch))
+            ->map(fn($key) => Str::of($key)->after(Esplora::REDIS_PREFIX)->start(Esplora::REDIS_PREFIX))
             ->toArray();
 
         if (count($keys) === 0) {

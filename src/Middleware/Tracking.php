@@ -46,19 +46,18 @@ class Tracking
      */
     protected function boot(Request $request): void
     {
-        if (! $this->esplora->isNeedVisitWrite($request)) {
+        if (!$this->esplora->isNeedVisitWrite($request)) {
             return;
         }
 
-        $this->esplora
-            ->fillingVisit(new Visit([
-                'id'                 => $this->esplora->loadVisitId(),
-                'ip'                 => $request->ip(),
-                'referer'            => $request->headers->get('referer'),
-                'user_agent'         => $request->userAgent(),
-                'url'                => $request->fullUrl(),
-                'preferred_language' => $request->getPreferredLanguage(),
-                'created_at'         => now(),
-            ]));
+        $this->esplora->saveAfterResponse(new Visit([
+            'id'                 => $this->esplora->loadVisitId(),
+            'ip'                 => $request->ip(),
+            'referer'            => $request->headers->get('referer'),
+            'user_agent'         => $request->userAgent(),
+            'url'                => $request->fullUrl(),
+            'preferred_language' => $request->getPreferredLanguage(),
+            'created_at'         => now(),
+        ]));
     }
 }
