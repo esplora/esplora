@@ -91,12 +91,24 @@ can use an intermediate Redis store, from which information will then be inserte
 php artisan esplora:insert
 ```
 
-You may define the time of recording to permanent storage using a schedule of scheduled tasks in the `schedule` method
+You may define the time of recording to permanent storage using a [schedule](https://laravel.com/docs/8.x/scheduling) of scheduled tasks in the `schedule` method
 of your application's `App\Console\Kernel` class. For example, every 10 minutes:
 
 ```php
 $schedule->command('esplora:insert')->everyTenMinutes();
 ```
+
+
+## Data Pruning
+
+Without pruning, the `esplora_visits` and `esplora_goals` tables can accumulate records very quickly. To mitigate this, you should schedule the `model:prune` Artisan command to run daily:
+
+```php
+$schedule->command('model:prune', [
+    '--model' => [Visit::class, Goal::class],
+])->daily();
+```
+
 
 ## License
 
