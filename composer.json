@@ -22,7 +22,7 @@
         "orchestra/testbench-core": "^6.2"
     },
     "conflict": {
-        "laravel/framework": "<5.50.0",
+        "laravel/framework": "<8.50.0",
         "orchestra/testbench-core": "<6.23"
     },
     "autoload": {
