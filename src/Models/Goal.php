@@ -69,12 +69,12 @@ class Goal extends Model
     }
 
     /**
-     * Create a new factory instance for the model.
+     * Get the prunable model query.
      *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    protected static function newFactory()
+    public function prunable()
     {
-        return app()->make(GoalFactory::class);
+        return static::where('created_at', '<=', now()->subYear());
     }
 }

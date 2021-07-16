@@ -77,4 +77,14 @@ class Visit extends Model
     {
         return config('esplora.connection');
     }
+
+    /**
+     * Get the prunable model query.
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function prunable()
+    {
+        return static::where('created_at', '<=', now()->subYear());
+    }
 }
