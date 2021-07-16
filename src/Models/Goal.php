@@ -6,11 +6,12 @@ namespace Esplora\Tracker\Models;
 
 use Database\Factories\GoalFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 
 class Goal extends Model
 {
-    use HasFactory;
+    use HasFactory, MassPrunable;
 
     /**
      * Indicates if the IDs are auto-incrementing.

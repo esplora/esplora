@@ -6,11 +6,12 @@ namespace Esplora\Tracker\Models;
 
 use Esplora\Tracker\Casts\UserAgent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 
 class Visit extends Model
 {
-    use HasFactory;
+    use HasFactory, MassPrunable;
 
     /**
      * Indicates if the IDs are auto-incrementing.
