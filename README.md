@@ -65,9 +65,8 @@ Route::get('about', function (){
 ## Configuration
 
 After publishing Esplora's assets, its primary configuration file will be located at `config/esplora.php`. This
-configuration file allows you to configure the request tracking options for your application.
-
-//...
+configuration file allows you to configure the request tracking options for your application. Each configuration option
+includes a description of its purpose, so be sure to explore this file thoroughly.
 
 ## Executing Goals
 

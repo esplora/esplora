@@ -7,7 +7,7 @@ return [
     | Aggregate filling
     |--------------------------------------------------------------------------
     |
-    | ...
+    | Here you may define a default connection.
     |
     | Supported: "sync", "redis"
     |
