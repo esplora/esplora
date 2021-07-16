@@ -46,7 +46,7 @@ class Tracking
      */
     protected function boot(Request $request): void
     {
-        if (!$this->esplora->isNeedVisitWrite($request)) {
+        if (! $this->esplora->isNeedVisitWrite($request)) {
             return;
         }
 

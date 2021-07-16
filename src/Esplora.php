@@ -6,7 +6,6 @@ namespace Esplora\Tracker;
 
 use Esplora\Tracker\Contracts\Rule;
 use Esplora\Tracker\Models\Goal;
-use Esplora\Tracker\Models\Visit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Redis\Connections\Connection;
@@ -123,7 +122,7 @@ class Esplora
 
         // get all keys
         $keys = collect($redis->keys($patternForSearch))
-            ->map(fn($key) => Str::of($key)->after(Esplora::REDIS_PREFIX)->start(Esplora::REDIS_PREFIX))
+            ->map(fn ($key) => Str::of($key)->after(Esplora::REDIS_PREFIX)->start(Esplora::REDIS_PREFIX))
             ->toArray();
 
         if (count($keys) === 0) {
