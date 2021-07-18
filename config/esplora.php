@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'filling' => 'redis',
+    'filling' => 'sync',
 
     /*
     |--------------------------------------------------------------------------
@@ -26,9 +26,9 @@ return [
     */
 
     'rules' => [
-        \Esplora\Tracker\Rules\RequestingRepresentation::class,
-        \Esplora\Tracker\Rules\RequestingDuplicate::class,
-        \Esplora\Tracker\Rules\RequestingBot::class,
+        \Esplora\Tracker\Rules\OnlyRepresentation::class,
+        \Esplora\Tracker\Rules\WeedOutDuplicates::class,
+        \Esplora\Tracker\Rules\WeedOutBots::class,
     ],
 
     /*
@@ -54,5 +54,18 @@ return [
     */
 
     'database' => env('DB_CONNECTION', 'mysql'),
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Pruning Models
+    |--------------------------------------------------------------------------
+    |
+    | Time in days when have to clean up the records of databases
+    | by deleting the oldest and useless data.
+    |
+    */
+
+    'pruning' => 365,
 
 ];

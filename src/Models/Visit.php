@@ -85,6 +85,6 @@ class Visit extends Model
      */
     public function prunable()
     {
-        return static::where('created_at', '<=', now()->subYear());
+        return static::where('created_at', '<=', now()->subDays(config('esplora.pruning')));
     }
 }
