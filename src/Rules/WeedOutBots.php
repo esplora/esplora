@@ -6,8 +6,9 @@ namespace Esplora\Tracker\Rules;
 
 use Esplora\Tracker\Contracts\Rule;
 use Illuminate\Http\Request;
+use Jenssegers\Agent\Agent;
 
-class RequestingRepresentation implements Rule
+class WeedOutBots implements Rule
 {
     /**
      * @param Request $request
@@ -16,6 +17,8 @@ class RequestingRepresentation implements Rule
      */
     public function passes(Request $request): bool
     {
-        return $request->isMethod(Request::METHOD_GET);
+        $agent = new Agent();
+
+        return ! $agent->isRobot();
     }
 }

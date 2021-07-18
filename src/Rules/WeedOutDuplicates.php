@@ -7,7 +7,7 @@ namespace Esplora\Tracker\Rules;
 use Esplora\Tracker\Contracts\Rule;
 use Illuminate\Http\Request;
 
-class RequestingDuplicate implements Rule
+class WeedOutDuplicates implements Rule
 {
     /**
      * @param Request $request

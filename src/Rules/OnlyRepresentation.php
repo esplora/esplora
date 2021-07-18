@@ -6,9 +6,8 @@ namespace Esplora\Tracker\Rules;
 
 use Esplora\Tracker\Contracts\Rule;
 use Illuminate\Http\Request;
-use Jenssegers\Agent\Agent;
 
-class RequestingBot implements Rule
+class OnlyRepresentation implements Rule
 {
     /**
      * @param Request $request
@@ -17,8 +16,6 @@ class RequestingBot implements Rule
      */
     public function passes(Request $request): bool
     {
-        $agent = new Agent();
-
-        return ! $agent->isRobot();
+        return $request->isMethod(Request::METHOD_GET);
     }
 }
