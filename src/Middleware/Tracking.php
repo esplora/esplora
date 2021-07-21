@@ -6,7 +6,7 @@ namespace Esplora\Tracker\Middleware;
 
 use Closure;
 use Esplora\Tracker\Esplora;
-use Esplora\Tracker\Models\Visit;
+use Esplora\Tracker\Models\Visitor;
 use Illuminate\Http\Request;
 
 class Tracking
@@ -50,7 +50,7 @@ class Tracking
             return;
         }
 
-        $this->esplora->saveAfterResponse(new Visit([
+        $this->esplora->saveAfterResponse(new Visitor([
             'id'                 => $this->esplora->loadVisitId(),
             'ip'                 => $request->ip(),
             'referer'            => $request->headers->get('referer'),

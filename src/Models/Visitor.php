@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 
-class Visit extends Model
+class Visitor extends Model
 {
-    use HasFactory, MassPrunable;
+    use HasFactory;
+    use MassPrunable;
 
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -30,7 +31,7 @@ class Visit extends Model
     /**
      * @var string
      */
-    protected $table = 'esplora_visits';
+    protected $table = 'esplora_visitors';
 
     /**
      * The attributes that are mass assignable.
@@ -39,14 +40,12 @@ class Visit extends Model
      */
     protected $fillable = [
         'id',
-        'url',
         'ip',
         'device',
         'platform',
         'browser',
         'preferred_language',
         'user_agent',
-        'referer',
         'created_at',
     ];
 
@@ -58,9 +57,7 @@ class Visit extends Model
     protected $casts = [
         'id'         => 'string',
         'ip'         => 'string',
-        'referer'    => 'string',
         'user_agent' => UserAgent::class,
-        'url'        => 'string',
         'created_at' => 'timestamp',
     ];
 

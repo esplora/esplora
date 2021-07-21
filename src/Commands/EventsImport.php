@@ -6,7 +6,7 @@ namespace Esplora\Tracker\Commands;
 
 use Esplora\Tracker\Esplora;
 use Esplora\Tracker\Models\Goal;
-use Esplora\Tracker\Models\Visit;
+use Esplora\Tracker\Models\Visitor;
 use Illuminate\Console\Command;
 
 class EventsImport extends Command
@@ -50,7 +50,7 @@ class EventsImport extends Command
     public function handle()
     {
         $goals = $this->esplora->importModelsForRedis(Goal::class);
-        $visits = $this->esplora->importModelsForRedis(Visit::class);
+        $visits = $this->esplora->importModelsForRedis(Visitor::class);
 
         $this->info("Persistent storage recorded $visits visits and $goals goals.");
 
