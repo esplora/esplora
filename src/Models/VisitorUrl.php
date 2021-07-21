@@ -39,6 +39,7 @@ class VisitorUrl extends Model
      * @var string[]
      */
     protected $fillable = [
+        'id',
         'url',
         'visitor_id',
         'referer',

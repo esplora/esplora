@@ -84,4 +84,9 @@ class Visitor extends Model
     {
         return static::where('created_at', '<=', now()->subDays(config('esplora.pruning')));
     }
+
+    public function urls()
+    {
+        return $this->hasMany(VisitorUrl::class);
+    }
 }

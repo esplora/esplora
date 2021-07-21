@@ -7,7 +7,9 @@ namespace Esplora\Tracker\Middleware;
 use Closure;
 use Esplora\Tracker\Esplora;
 use Esplora\Tracker\Models\Visitor;
+use Esplora\Tracker\Models\VisitorUrl;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class Tracking
 {
@@ -50,14 +52,20 @@ class Tracking
             return;
         }
 
-        $this->esplora->saveAfterResponse(new Visitor([
-            'id'                 => $this->esplora->loadVisitId(),
+        $visitor = Visitor::findOrNew($this->esplora->loadVisitId())->fill([
             'ip'                 => $request->ip(),
-            'referer'            => $request->headers->get('referer'),
             'user_agent'         => $request->userAgent(),
-            'url'                => $request->fullUrl(),
             'preferred_language' => $request->getPreferredLanguage(),
             'created_at'         => now(),
-        ]));
+        ]);
+        $url = new VisitorUrl([
+            'id'                 => Str::orderedUuid(),
+            'visitor_id'         => $visitor->id,
+            'url'                => $request->fullUrl(),
+            'referer'            => $request->headers->get('referer')
+        ]);
+
+        $this->esplora->saveAfterResponse($visitor);
+        $this->esplora->saveAfterResponse($url);
     }
 }
