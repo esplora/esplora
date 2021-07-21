@@ -6,6 +6,7 @@ namespace Esplora\Tracker\Tests;
 
 use Esplora\Tracker\Esplora;
 use Esplora\Tracker\Models\Visitor;
+use Esplora\Tracker\Models\VisitorUrl;
 use Illuminate\Support\Str;
 
 class VisitorSyncTest extends TestCase
@@ -61,8 +62,7 @@ class VisitorSyncTest extends TestCase
         ]);
 
         $this->get($route)->assertOk();
-
-        $visits = Visitor::where('url', $route)->get();
+        $visits = Visitor::all();
 
         $this->assertCount(1, $visits);
     }
@@ -78,7 +78,7 @@ class VisitorSyncTest extends TestCase
             'Referer' => $referer,
         ])->assertOk();
 
-        $visits = Visitor::where('referer', $referer)->get();
+        $visits = VisitorUrl::where('referer', $referer)->get();
 
         $this->assertCount(1, $visits);
     }

@@ -51,8 +51,9 @@ class Tracking
         if (! $this->esplora->isNeedVisitWrite($request)) {
             return;
         }
-
-        $visitor = Visitor::findOrNew($this->esplora->loadVisitId())->fill([
+        $visitor = Visitor::firstOrNew([
+            'id' => $this->esplora->loadVisitId()
+        ])->fill([
             'ip'                 => $request->ip(),
             'user_agent'         => $request->userAgent(),
             'preferred_language' => $request->getPreferredLanguage(),
