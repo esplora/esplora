@@ -13,18 +13,15 @@ return new class extends Migration {
     public function up()
     {
         Schema::connection(config('esplora.connection'))
-            ->create('esplora_visits', function (Blueprint $table) {
-                $table->string('id');
+            ->create('esplora_visitors', function (Blueprint $table) {
+                $table->uuid('id')->primary();
 
-                $table->string('url')->nullable();
                 $table->string('ip', 40);
 
                 $table->string('device')->nullable();             // Mobile, Desktop, Tablet, Robot
                 $table->string('platform')->nullable();           // Ubuntu, Windows, OS X
                 $table->string('browser')->nullable();            // Chrome, IE, Safari, Firefox,
                 $table->string('preferred_language')->nullable(); // en/jp/ru/de
-
-                $table->string('referer')->nullable();
 
                 $table->timestamp('created_at')->useCurrent();
             });
@@ -37,6 +34,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::connection(config('esplora.connection'))->dropIfExists('visits');
+        Schema::connection(config('esplora.connection'))->dropIfExists('esplora_visitors');
     }
 };

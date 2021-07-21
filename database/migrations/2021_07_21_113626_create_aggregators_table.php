@@ -13,13 +13,12 @@ return new class extends Migration {
     public function up()
     {
         Schema::connection(config('esplora.connection'))
-            ->create('esplora_goals', function (Blueprint $table) {
-                $table->uuid('id')->primary();
+            ->create('esplora_aggregators', function (Blueprint $table) {
+                $table->uuid('id');
+                $table->json('data');
 
-                $table->foreignUuid('visitor_id')->references('id')->on('esplora_visitors');
-
-                $table->string('name');
-                $table->json('parameters')->nullable();
+                $table->dateTime('start_at')->comment('start of the time interval');
+                $table->dateTime('finish_at')->comment('end of the time interval');
                 $table->timestamp('created_at')->useCurrent();
             });
     }
@@ -31,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::connection(config('esplora.connection'))->dropIfExists('esplora_goals');
+        Schema::connection(config('esplora.connection'))->dropIfExists('esplora_aggregators');
     }
 };
