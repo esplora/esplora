@@ -52,7 +52,7 @@ class Tracking
             return;
         }
         $visitor = Visitor::firstOrNew([
-            'id' => $this->esplora->loadVisitId()
+            'id' => $this->esplora->loadVisitId(),
         ])->fill([
             'ip'                 => $request->ip(),
             'user_agent'         => $request->userAgent(),
@@ -63,7 +63,7 @@ class Tracking
             'id'                 => Str::orderedUuid(),
             'visitor_id'         => $visitor->id,
             'url'                => $request->fullUrl(),
-            'referer'            => $request->headers->get('referer')
+            'referer'            => $request->headers->get('referer'),
         ]);
 
         $this->esplora->saveAfterResponse($visitor);
