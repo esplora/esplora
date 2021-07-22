@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Builder;
 
 /**
  * Class Aggregator
+ *
  * @package Esplora\Tracker
  */
 abstract class Aggregator
 {
     /**
      * Return query builder which has prepared query request
+     *
      * @return Builder
      */
     abstract protected function query(): Builder;

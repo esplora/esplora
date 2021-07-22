@@ -16,6 +16,5 @@ class CountVisitorAggregateTest extends TestCase
 
     public function testIsRightCountVisited()
     {
-
     }
 }
