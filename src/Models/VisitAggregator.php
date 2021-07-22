@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Esplora\Tracker\Models;
 
-use Esplora\Tracker\Casts\UserAgent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
