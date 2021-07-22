@@ -57,6 +57,18 @@ return [
     'database' => env('DB_CONNECTION', 'mysql'),
 
 
+     /*
+     |--------------------------------------------------------------------------
+     | Interval time
+     |--------------------------------------------------------------------------
+     |
+     | Time in hours, which define interval aggregate data
+     | Minimum value - 1 hour
+     |
+     */
+
+    'interval' => 24,
+
     /*
     |--------------------------------------------------------------------------
     | Pruning Models
