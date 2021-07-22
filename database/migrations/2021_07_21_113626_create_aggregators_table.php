@@ -16,9 +16,6 @@ return new class extends Migration {
             ->create('esplora_aggregators', function (Blueprint $table) {
                 $table->uuid('id');
                 $table->json('data');
-
-                $table->dateTime('start_at')->comment('start of the time interval');
-                $table->dateTime('finish_at')->comment('end of the time interval');
                 $table->timestamp('created_at')->useCurrent();
             });
     }
