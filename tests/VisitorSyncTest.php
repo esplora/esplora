@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Esplora\Tracker\Tests;
 
 use Esplora\Tracker\Esplora;
-use Esplora\Tracker\Models\Visit;
+use Esplora\Tracker\Models\Visitor;
+use Esplora\Tracker\Models\VisitorUrl;
 use Illuminate\Support\Str;
 
 class VisitorSyncTest extends TestCase
@@ -29,7 +30,7 @@ class VisitorSyncTest extends TestCase
         $this->startSession()->get('visit')
             ->assertOk();
 
-        $this->assertCount(1, Visit::all());
+        $this->assertCount(1, Visitor::all());
     }
 
     /**
@@ -46,7 +47,7 @@ class VisitorSyncTest extends TestCase
             ->assertOk();
 
 
-        $visit = Visit::find($id);
+        $visit = Visitor::find($id);
 
         $this->assertNotNull($visit);
     }
@@ -61,8 +62,7 @@ class VisitorSyncTest extends TestCase
         ]);
 
         $this->get($route)->assertOk();
-
-        $visits = Visit::where('url', $route)->get();
+        $visits = Visitor::all();
 
         $this->assertCount(1, $visits);
     }
@@ -78,7 +78,7 @@ class VisitorSyncTest extends TestCase
             'Referer' => $referer,
         ])->assertOk();
 
-        $visits = Visit::where('referer', $referer)->get();
+        $visits = VisitorUrl::where('referer', $referer)->get();
 
         $this->assertCount(1, $visits);
     }
