@@ -35,6 +35,7 @@ abstract class Aggregator
 
     /**
      * Get key as unique key for define in database
+     *
      * @return string
      */
     public static function key(): string

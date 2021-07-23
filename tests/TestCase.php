@@ -6,9 +6,9 @@ namespace Esplora\Tracker\Tests;
 
 use Esplora\Tracker\Facades\Tracker;
 use Esplora\Tracker\Middleware\Tracking;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Database\Eloquent\Factories\Factory;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -44,6 +44,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
         Factory::guessFactoryNamesUsing(function ($factory) {
             $factoryBasename = class_basename($factory);
+
             return "Esplora\Tracker\Database\Factories\\$factoryBasename".'Factory';
         });
     }

@@ -32,16 +32,16 @@ class CountVisitorAggregateTest extends TestCase
 
         // visitor who was aggregated
         $factoryVisitor->create([
-            'created_at' => $timePointInPast
+            'created_at' => $timePointInPast,
         ]);
 
         // new visitor
         $factoryVisitor->create([
-            'created_at' => Carbon::now()
+            'created_at' => Carbon::now(),
         ]);
         EsploraAggregator::factory()->count(4)->create([
-            'key' => CountVisitorsAggregate::key(),
-            'created_at' => $timePointInPast
+            'key'        => CountVisitorsAggregate::key(),
+            'created_at' => $timePointInPast,
         ]);
         $aggregate = new CountVisitorsAggregate();
         $this->assertEquals(1, $aggregate->getCount());
