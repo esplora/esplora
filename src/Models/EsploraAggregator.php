@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\MassPrunable;
 use Illuminate\Database\Eloquent\Model;
 
-class VisitAggregator extends Model
+class EsploraAggregator extends Model
 {
     use HasFactory;
     use MassPrunable;
@@ -50,8 +50,5 @@ class VisitAggregator extends Model
      */
     protected $casts = [
         'data'        => 'array',
-        'start_at'    => 'datetime',
-        'finish_at'   => 'datetime',
-        'created_at'  => 'timestamp',
     ];
 }

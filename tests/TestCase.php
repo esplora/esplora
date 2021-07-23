@@ -8,6 +8,7 @@ use Esplora\Tracker\Facades\Tracker;
 use Esplora\Tracker\Middleware\Tracking;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -40,6 +41,11 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         })
             ->middleware(['web', Tracking::class])
             ->name('goal');
+
+        Factory::guessFactoryNamesUsing(function ($factory) {
+            $factoryBasename = class_basename($factory);
+            return "Esplora\Tracker\Database\Factories\\$factoryBasename".'Factory';
+        });
     }
 
     /**

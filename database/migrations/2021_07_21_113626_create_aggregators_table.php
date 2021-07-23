@@ -16,6 +16,7 @@ return new class extends Migration {
             ->create('esplora_aggregators', function (Blueprint $table) {
                 $table->uuid('id');
                 $table->json('data');
+                $table->string('key')->index();
                 $table->timestamp('created_at')->useCurrent();
             });
     }
