@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Esplora\Tracker\Tests;
+namespace Esplora\Tracker\Tests\Aggregators;
 
 use Carbon\Carbon;
 use Esplora\Tracker\Aggregators\CountVisitorsAggregate;
 use Esplora\Tracker\Models\EsploraAggregator;
 use Esplora\Tracker\Models\Visitor;
+use Esplora\Tracker\Tests\TestCase;
 
 class CountVisitorAggregateTest extends TestCase
 {
@@ -26,13 +27,13 @@ class CountVisitorAggregateTest extends TestCase
 
     public function testWhenWasRecordsBefore()
     {
-        $timePointInPast = Carbon::now()->subHours(2);
+        $pointInPast = Carbon::now()->subHours(2);
 
         $factoryVisitor = Visitor::factory();
 
         // visitor who was aggregated
         $factoryVisitor->create([
-            'created_at' => $timePointInPast,
+            'created_at' => $pointInPast,
         ]);
 
         // new visitor
@@ -41,7 +42,7 @@ class CountVisitorAggregateTest extends TestCase
         ]);
         EsploraAggregator::factory()->count(4)->create([
             'key'        => CountVisitorsAggregate::key(),
-            'created_at' => $timePointInPast,
+            'created_at' => $pointInPast,
         ]);
         $aggregate = new CountVisitorsAggregate();
         $this->assertEquals(1, $aggregate->getCount());

@@ -6,6 +6,7 @@ namespace Esplora\Tracker\Tests;
 
 use Esplora\Tracker\Facades\Tracker;
 use Esplora\Tracker\Middleware\Tracking;
+use Helmich\JsonAssert\JsonAssertions;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
     use RefreshDatabase;
+    use JsonAssertions;
 
     /**
      * Setup the test environment.
@@ -44,8 +46,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
         Factory::guessFactoryNamesUsing(function ($factory) {
             $factoryBasename = class_basename($factory);
-
-            return "Esplora\Tracker\Database\Factories\\$factoryBasename".'Factory';
+            return "Esplora\Tracker\Database\Factories\\$factoryBasename" . 'Factory';
         });
     }
 
