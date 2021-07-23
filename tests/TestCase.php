@@ -46,6 +46,7 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
         Factory::guessFactoryNamesUsing(function ($factory) {
             $factoryBasename = class_basename($factory);
+
             return "Esplora\Tracker\Database\Factories\\$factoryBasename" . 'Factory';
         });
     }

@@ -42,6 +42,7 @@ abstract class Aggregator
     {
         return $this->filterDate()->get();
     }
+
     /**
      * Get key as unique key for define in database
      *
@@ -61,6 +62,7 @@ abstract class Aggregator
         if (is_null($lastAggregation) === false) {
             return $this->query()->where('created_at', '>', $lastAggregation->created_at);
         }
+
         return $this->query();
     }
 }

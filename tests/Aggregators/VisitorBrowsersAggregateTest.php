@@ -21,16 +21,16 @@ class VisitorBrowsersAggregateTest extends TestCase
 
         $this->assertJsonDocumentMatchesSchema($aggregator->presenter()->toJson(), [
             'type'       => 'array',
-            'items' => [
-                'type' => 'object',
-                'required' => ['browser', 'count'],
-                'properties' =>  [
+            'items'      => [
+                'type'       => 'object',
+                'required'   => ['browser', 'count'],
+                'properties' => [
                     'browser' => [
-                        'type' => 'string'
+                        'type' => 'string',
                     ],
                     'count' => [
-                        'type' => 'number'
-                    ]
+                        'type' => 'number',
+                    ],
                 ],
             ],
         ]);
@@ -39,10 +39,10 @@ class VisitorBrowsersAggregateTest extends TestCase
     public function testValidCountBrowsers()
     {
         Visitor::factory()->create([
-            'browser' => 'Chrome'
+            'browser' => 'Chrome',
         ]);
         Visitor::factory()->create([
-            'browser' => 'Firefox'
+            'browser' => 'Firefox',
         ]);
 
         $aggregator = new VisitorBrowsersAggregate();
@@ -60,14 +60,14 @@ class VisitorBrowsersAggregateTest extends TestCase
 
         // old visitor
         Visitor::factory()->create([
-            'browser' => 'Chrome',
-            'created_at' => $pointInPast
+            'browser'    => 'Chrome',
+            'created_at' => $pointInPast,
         ]);
 
         // fresh visitor
         Visitor::factory()->create([
-            'browser' => 'Chrome',
-            'created_at' => Carbon::now()
+            'browser'    => 'Chrome',
+            'created_at' => Carbon::now(),
         ]);
 
         EsploraAggregator::factory()->count(1)->create([
@@ -81,8 +81,8 @@ class VisitorBrowsersAggregateTest extends TestCase
         $this->assertJsonValueEquals($json, '0.count', '1');
         $this->assertJsonDocumentMatchesSchema($aggregator->presenter()->toJson(), [
             'type'       => 'array',
-            'minItems' =>  1,
-            'maxItems' =>  1,
+            'minItems'   => 1,
+            'maxItems'   => 1,
         ]);
     }
 }

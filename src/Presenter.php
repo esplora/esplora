@@ -14,6 +14,7 @@ abstract class Presenter implements Jsonable
 
     /**
      * Presenter constructor.
+     *
      * @param Collection $collection
      */
     public function __construct(Collection $collection)
@@ -23,12 +24,14 @@ abstract class Presenter implements Jsonable
 
     /**
      * @param Model $model
+     *
      * @return array
      */
     abstract public function present(Model $model): array;
 
     /**
      * @param int $options
+     *
      * @return string
      */
     public function toJson($options = 0)
