@@ -61,6 +61,15 @@ class Esplora
     }
 
     /**
+     * Return true if Visitor is not new
+     * @return bool
+     */
+    public function isVisitExist(): bool
+    {
+        return $this->request->session()->exists(Esplora::ID_SESSION);
+    }
+
+    /**
      * @return Connection
      */
     public function redis(): Connection

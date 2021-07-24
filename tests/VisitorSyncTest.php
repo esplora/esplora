@@ -36,10 +36,12 @@ class VisitorSyncTest extends TestCase
     /**
      *
      */
-    public function testIdVisitor(): void
+    public function testVisitorExist(): void
     {
         $id = Str::orderedUuid();
-
+        Visitor::factory()->create([
+           'id' => $id
+        ]);
         $this->session([
             Esplora::ID_SESSION => $id,
         ])
@@ -52,6 +54,13 @@ class VisitorSyncTest extends TestCase
         $this->assertNotNull($visit);
     }
 
+    public function testNewVisitor(): void
+    {
+        $this
+            ->get('visit')
+            ->assertOk();
+        $this->assertCount(1, Visitor::all());
+    }
     /**
      *
      */
@@ -63,8 +72,10 @@ class VisitorSyncTest extends TestCase
 
         $this->get($route)->assertOk();
         $visits = Visitor::all();
+        $urls = VisitorUrl::all();
 
         $this->assertCount(1, $visits);
+        $this->assertCount(1, $urls);
     }
 
     /**

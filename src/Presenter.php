@@ -31,7 +31,7 @@ abstract class Presenter implements Jsonable
      * @param int $options
      * @return string
      */
-    public function toJson($options = 0)
+    public function toJson($options = 0): string
     {
         return $this->collection->map([$this, 'present'])->toJson();
     }

@@ -51,22 +51,39 @@ class Tracking
         if (! $this->esplora->isNeedVisitWrite($request)) {
             return;
         }
-        $visitor = Visitor::firstOrNew([
-            'id' => $this->esplora->loadVisitId(),
-        ])->fill([
-            'ip'                 => $request->ip(),
-            'user_agent'         => $request->userAgent(),
-            'preferred_language' => $request->getPreferredLanguage(),
-            'created_at'         => now(),
-        ]);
+        $this->createVisitor($request);
+        $this->createUrl($request);
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function createVisitor(Request $request): void
+    {
+        if ($this->esplora->isVisitExist() === false) {
+            $visitor = Visitor::create([
+                'id' => $this->esplora->loadVisitId(),
+                'ip'                 => $request->ip(),
+                'user_agent'         => $request->userAgent(),
+                'preferred_language' => $request->getPreferredLanguage(),
+                'created_at'         => now(),
+            ]);
+            $this->esplora->saveAfterResponse($visitor);
+        }
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function createUrl(Request $request): void
+    {
         $url = new VisitorUrl([
             'id'                 => Str::orderedUuid(),
-            'visitor_id'         => $visitor->id,
+            'visitor_id'         => $this->esplora->loadVisitId(),
             'url'                => $request->fullUrl(),
             'referer'            => $request->headers->get('referer'),
         ]);
 
-        $this->esplora->saveAfterResponse($visitor);
         $this->esplora->saveAfterResponse($url);
     }
 }
