@@ -13,7 +13,7 @@ class VisitorBrowsersPresenter extends Presenter
     {
         return [
            'browser' => $model->browser,
-           'count' => (int)$model->count
+           'count'   => (int)$model->count,
         ];
     }
 }
