@@ -62,6 +62,7 @@ class Esplora
 
     /**
      * Return true if Visitor is not new
+     *
      * @return bool
      */
     public function isVisitExist(): bool

@@ -62,7 +62,7 @@ class Tracking
     {
         if ($this->esplora->isVisitExist() === false) {
             $visitor = Visitor::create([
-                'id' => $this->esplora->loadVisitId(),
+                'id'                 => $this->esplora->loadVisitId(),
                 'ip'                 => $request->ip(),
                 'user_agent'         => $request->userAgent(),
                 'preferred_language' => $request->getPreferredLanguage(),

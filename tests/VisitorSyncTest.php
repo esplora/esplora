@@ -40,7 +40,7 @@ class VisitorSyncTest extends TestCase
     {
         $id = Str::orderedUuid();
         Visitor::factory()->create([
-           'id' => $id
+           'id' => $id,
         ]);
         $this->session([
             Esplora::ID_SESSION => $id,
@@ -61,6 +61,7 @@ class VisitorSyncTest extends TestCase
             ->assertOk();
         $this->assertCount(1, Visitor::all());
     }
+
     /**
      *
      */
