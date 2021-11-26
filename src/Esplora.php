@@ -110,12 +110,13 @@ class Esplora
     }
 
     /**
-     * @param  Model  $model
+     * @param Model $model
      */
     public function save(Model $model): void
     {
         if (config('esplora.filling', 'sync') === 'sync') {
             $model->save();
+
             return;
         }
 
@@ -133,7 +134,7 @@ class Esplora
      */
     public function saveAfterResponse(Model $model): void
     {
-        dispatch(fn() => $this->save($model))->afterResponse();
+        dispatch(fn () => $this->save($model))->afterResponse();
     }
 
     /**
