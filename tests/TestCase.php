@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Esplora\Tracker\Tests;
 
+use Esplora\Tracker\EsploraServiceProvider;
 use Esplora\Tracker\Facades\Tracker;
 use Esplora\Tracker\Middleware\Tracking;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -50,5 +51,17 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         ]);
         $config->set('scout.driver', 'array');
         $config->set('database.default', 'orchid');
+    }
+
+    /**
+     * @param \Illuminate\Foundation\Application $app
+     *
+     * @return array
+     */
+    protected function getPackageProviders($app): array
+    {
+        return [
+            EsploraServiceProvider::class,
+        ];
     }
 }
