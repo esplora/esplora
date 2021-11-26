@@ -81,7 +81,7 @@ class Esplora
             return;
         }
 
-        $this->saveAfterResponse(new Visit([
+        $this->save(new Visit([
             'id'                 => $this->loadVisitId(),
             'ip'                 => $request->ip(),
             'referer'            => $request->headers->get('referer'),
@@ -110,25 +110,30 @@ class Esplora
     }
 
     /**
+     * @param  Model  $model
+     */
+    public function save(Model $model): void
+    {
+        if (config('esplora.filling', 'sync') === 'sync') {
+            $model->save();
+            return;
+        }
+
+        $key = Str::of(get_class($model))->classBasename()
+            ->start(Esplora::REDIS_PREFIX)
+            ->finish('_')
+            ->finish(Str::uuid())
+            ->slug();
+
+        $this->redis()->set($key, $model->toJson());
+    }
+
+    /**
      * @param Model $model
      */
     public function saveAfterResponse(Model $model): void
     {
-        dispatch(function () use ($model) {
-            if (config('esplora.filling', 'sync') === 'sync') {
-                $model->save();
-
-                return;
-            }
-
-            $key = Str::of(get_class($model))->classBasename()
-                ->start(Esplora::REDIS_PREFIX)
-                ->finish('_')
-                ->finish(Str::uuid())
-                ->slug();
-
-            $this->redis()->set($key, $model->toJson());
-        })->afterResponse();
+        dispatch(fn() => $this->save($model))->afterResponse();
     }
 
     /**
