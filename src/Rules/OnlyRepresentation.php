@@ -16,7 +16,7 @@ class OnlyRepresentation implements Rule
      *
      * @return bool
      */
-    public function passes(Request $request, Response $response): bool
+    public function passes($request, $response): bool
     {
         return $request->isMethod(Request::METHOD_GET);
     }

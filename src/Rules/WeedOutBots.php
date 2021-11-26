@@ -17,7 +17,7 @@ class WeedOutBots implements Rule
      *
      * @return bool
      */
-    public function passes(Request $request, Response $response): bool
+    public function passes($request, $response): bool
     {
         $agent = new Agent();
 

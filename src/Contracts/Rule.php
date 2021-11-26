@@ -12,9 +12,10 @@ interface Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param Request $request
+     * @param  Request   $request
+     * @param  Response  $response
      *
      * @return bool
      */
-    public function passes(Request $request, Response $response): bool;
+    public function passes($request, $response): bool;
 }

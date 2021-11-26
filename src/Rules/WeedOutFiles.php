@@ -16,7 +16,7 @@ class WeedOutFiles implements Rule
      *
      * @return bool
      */
-    public function passes(Request $request, Response $response): bool
+    public function passes($request, $response): bool
     {
         return empty(pathinfo($request->url(), PATHINFO_EXTENSION));
     }

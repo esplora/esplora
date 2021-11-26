@@ -116,6 +116,22 @@ class VisitorSyncTest extends TestCase
     /**
      *
      */
+    public function testRedirectResponseVisitor(): void
+    {
+        Route::get('visit-redirect', fn () => response()->redirectTo('/redirect'))
+            ->middleware(['web', Tracking::class])
+            ->name('visit-redirect');
+
+        $this->get(route('visit-redirect'))->assertRedirect('/redirect')->getStatusCode();
+
+        $visits = Visit::where('response_code', 302)->get();
+
+        $this->assertCount(1, $visits);
+    }
+
+    /**
+     *
+     */
     public function testTimeResponseVisitor(): void
     {
         $this->get(route('visit'));

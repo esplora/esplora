@@ -39,11 +39,12 @@ class Esplora
     }
 
     /**
-     * @param Request $request
+     * @param  Request   $request
+     * @param  Response  $response
      *
      * @return bool
      */
-    public function isNeedVisitWrite(Request $request, Response $response): bool
+    public function isNeedVisitWrite($request, $response): bool
     {
         return collect(config('esplora.rules'))
             ->map(fn (string $class)   => app()->make($class))
@@ -74,7 +75,7 @@ class Esplora
      * @param Request  $request
      * @param Response $response
      */
-    public function visit(Request $request, Response $response)
+    public function visit($request, $response)
     {
         if (! $this->isNeedVisitWrite($request, $response)) {
             return;

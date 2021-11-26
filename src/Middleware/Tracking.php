@@ -47,7 +47,7 @@ class Tracking
      *
      * @return void
      */
-    public function terminate(Request $request, Response $response)
+    public function terminate($request, $response)
     {
         $this->esplora->visit($request, $response);
     }
