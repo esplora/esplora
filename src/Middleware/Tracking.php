@@ -7,7 +7,6 @@ namespace Esplora\Tracker\Middleware;
 use Closure;
 use Esplora\Tracker\Esplora;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class Tracking
 {
