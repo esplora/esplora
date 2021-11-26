@@ -11,8 +11,8 @@ use Illuminate\Http\Response;
 class OnlyRepresentation implements Rule
 {
     /**
-     * @param  Request   $request
-     * @param  Response  $response
+     * @param Request  $request
+     * @param Response $response
      *
      * @return bool
      */

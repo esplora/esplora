@@ -12,8 +12,8 @@ use Jenssegers\Agent\Agent;
 class WeedOutBots implements Rule
 {
     /**
-     * @param  Request   $request
-     * @param  Response  $response
+     * @param Request  $request
+     * @param Response $response
      *
      * @return bool
      */
