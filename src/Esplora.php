@@ -39,8 +39,8 @@ class Esplora
     }
 
     /**
-     * @param  Request   $request
-     * @param  Response  $response
+     * @param Request  $request
+     * @param Response $response
      *
      * @return bool
      */

@@ -12,8 +12,8 @@ interface Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  Request   $request
-     * @param  Response  $response
+     * @param Request  $request
+     * @param Response $response
      *
      * @return bool
      */
