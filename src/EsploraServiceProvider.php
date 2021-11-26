@@ -34,7 +34,7 @@ class EsploraServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        if ($this->app->runningInConsole()) {
+        if ($this->app->runningInConsole() && config('app.env') !== 'testing') {
             $this->commands([
                 EventsImport::class,
             ]);
