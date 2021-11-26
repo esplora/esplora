@@ -102,7 +102,7 @@ class VisitorSyncTest extends TestCase
      */
     public function testErrorResponseVisitor(): void
     {
-        Route::get('visit-error', fn() => abort(501))
+        Route::get('visit-error', fn () => abort(501))
             ->middleware(['web', Tracking::class])
             ->name('visit-error');
 

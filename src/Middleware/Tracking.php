@@ -19,7 +19,7 @@ class Tracking
     /**
      * Tracking constructor.
      *
-     * @param  Esplora  $esplora
+     * @param Esplora $esplora
      */
     public function __construct(Esplora $esplora)
     {
@@ -29,8 +29,8 @@ class Tracking
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure                  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
      *
      * @return mixed
      */
@@ -42,8 +42,8 @@ class Tracking
     /**
      * Handle tasks after the response has been sent to the browser.
      *
-     * @param  \Illuminate\Http\Request   $request
-     * @param  \Illuminate\Http\Response  $response
+     * @param \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Response $response
      *
      * @return void
      */
