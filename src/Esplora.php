@@ -6,6 +6,7 @@ namespace Esplora\Tracker;
 
 use Esplora\Tracker\Contracts\Rule;
 use Esplora\Tracker\Models\Goal;
+use Esplora\Tracker\Models\Visit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Redis\Connections\Connection;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 use Illuminate\Support\Traits\Conditionable;
 use Ramsey\Uuid\Rfc4122\UuidV4;
+use Illuminate\Http\Response;
 
 class Esplora
 {
@@ -29,7 +31,7 @@ class Esplora
     /**
      * Visitor constructor.
      *
-     * @param Request $request
+     * @param  Request  $request
      */
     public function __construct(Request $request)
     {
@@ -37,16 +39,16 @@ class Esplora
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      *
      * @return bool
      */
-    public function isNeedVisitWrite(Request $request): bool
+    public function isNeedVisitWrite(Request $request, Response $response): bool
     {
         return collect(config('esplora.rules'))
-            ->map(fn (string $class)   => app()->make($class))
-            ->map(fn (Rule $rule)      => $rule->passes($request))
-            ->filter(fn (bool $result) => $result === false)
+            ->map(fn(string $class) => app()->make($class))
+            ->map(fn(Rule $rule) => $rule->passes($request, $response))
+            ->filter(fn(bool $result) => $result === false)
             ->isEmpty();
     }
 
@@ -57,7 +59,7 @@ class Esplora
     {
         return $this->request
             ->session()
-            ->remember(Esplora::ID_SESSION, fn () => Str::orderedUuid());
+            ->remember(Esplora::ID_SESSION, fn() => Str::orderedUuid());
     }
 
     /**
@@ -69,15 +71,38 @@ class Esplora
     }
 
     /**
-     * @param string $name
-     * @param array  $parameters
+     * @param  Request   $request
+     * @param  Response  $response
+     */
+    public function visit(Request $request, Response $response)
+    {
+        if (!$this->isNeedVisitWrite($request, $response)) {
+            return;
+        }
+
+        $this->saveAfterResponse(new Visit([
+            'id'                 => $this->loadVisitId(),
+            'ip'                 => $request->ip(),
+            'referer'            => $request->headers->get('referer'),
+            'user_agent'         => $request->userAgent(),
+            'url'                => $request->fullUrl(),
+            'preferred_language' => $request->getPreferredLanguage(),
+            'response_code'      => $response->getStatusCode(),
+            'response_time'      => defined('LARAVEL_START') ? microtime(true) - LARAVEL_START : null,
+            'created_at'         => now(),
+        ]));
+    }
+
+    /**
+     * @param  string  $name
+     * @param  array   $parameters
      */
     public function goal(string $name, array $parameters = []): void
     {
         $this->saveAfterResponse(new Goal([
-            'id'         => Str::orderedUuid(),
+            'id' => Str::orderedUuid(),
             'visitor_id' => $this->loadVisitId(),
-            'name'       => $name,
+            'name' => $name,
             'parameters' => $parameters,
             'created_at' => now(),
         ]));
@@ -106,7 +131,7 @@ class Esplora
     }
 
     /**
-     * @param string $model
+     * @param  string  $model
      *
      * @return int
      */
@@ -122,7 +147,7 @@ class Esplora
 
         // get all keys
         $keys = collect($redis->keys($patternForSearch))
-            ->map(fn ($key) => Str::of($key)->after(Esplora::REDIS_PREFIX)->start(Esplora::REDIS_PREFIX))
+            ->map(fn($key) => Str::of($key)->after(Esplora::REDIS_PREFIX)->start(Esplora::REDIS_PREFIX))
             ->toArray();
 
         if (count($keys) === 0) {
@@ -132,8 +157,9 @@ class Esplora
         // get all values
         $values = collect()
             ->merge($redis->mGet($keys))
-            ->map(fn (string $value) => json_decode($value, true, 512, JSON_THROW_ON_ERROR))
-            ->map(fn (array $value)  => collect($value)->map(fn ($attr)  => is_array($attr) ? json_encode($attr, JSON_THROW_ON_ERROR) : $attr))
+            ->map(fn(string $value) => json_decode($value, true, 512, JSON_THROW_ON_ERROR))
+            ->map(fn(array $value) => collect($value)->map(fn($attr) => is_array($attr) ? json_encode($attr,
+                JSON_THROW_ON_ERROR) : $attr))
             ->toArray();
 
         // save mass records

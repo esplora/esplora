@@ -47,6 +47,8 @@ class Visit extends Model
         'preferred_language',
         'user_agent',
         'referer',
+        'response_code',
+        'response_time',
         'created_at',
     ];
 

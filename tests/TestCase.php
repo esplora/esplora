@@ -24,26 +24,19 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(realpath('./database/migrations'));
 
-
-        Route::get('visit/{string?}', function () {
-            return '';
-        })
+        Route::get('visit/{string?}', fn() => '')
             ->middleware(['web', Tracking::class])
             ->name('visit');
 
-        Route::get('goal', function () {
-            Tracker::goal('changeTheme', [
-                'color' => 'dark',
-            ]);
-
-            return '';
-        })
+        Route::get('goal', fn() => Tracker::goal('changeTheme', [
+            'color' => 'dark',
+        ]))
             ->middleware(['web', Tracking::class])
             ->name('goal');
     }
 
     /**
-     * @param \Illuminate\Foundation\Application $app
+     * @param  \Illuminate\Foundation\Application  $app
      */
     protected function getEnvironmentSetUp($app): void
     {
@@ -51,9 +44,9 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
 
         // set up database configuration
         $config->set('database.connections.orchid', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
         $config->set('scout.driver', 'array');
         $config->set('database.default', 'orchid');

@@ -6,8 +6,8 @@ namespace Esplora\Tracker\Middleware;
 
 use Closure;
 use Esplora\Tracker\Esplora;
-use Esplora\Tracker\Models\Visit;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class Tracking
 {
@@ -19,7 +19,7 @@ class Tracking
     /**
      * Tracking constructor.
      *
-     * @param Esplora $esplora
+     * @param  Esplora  $esplora
      */
     public function __construct(Esplora $esplora)
     {
@@ -29,35 +29,26 @@ class Tracking
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure                  $next
      *
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
-        $this->boot($request);
-
         return $next($request);
     }
 
     /**
-     * @param Request $request
+     * Handle tasks after the response has been sent to the browser.
+     *
+     * @param  \Illuminate\Http\Request   $request
+     * @param  \Illuminate\Http\Response  $response
+     *
+     * @return void
      */
-    protected function boot(Request $request): void
+    public function terminate(Request $request, Response $response)
     {
-        if (! $this->esplora->isNeedVisitWrite($request)) {
-            return;
-        }
-
-        $this->esplora->saveAfterResponse(new Visit([
-            'id'                 => $this->esplora->loadVisitId(),
-            'ip'                 => $request->ip(),
-            'referer'            => $request->headers->get('referer'),
-            'user_agent'         => $request->userAgent(),
-            'url'                => $request->fullUrl(),
-            'preferred_language' => $request->getPreferredLanguage(),
-            'created_at'         => now(),
-        ]));
+        $this->esplora->visit($request, $response);
     }
 }

@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Esplora\Tracker\Tests;
 
 use Esplora\Tracker\Esplora;
+use Esplora\Tracker\Middleware\Tracking;
 use Esplora\Tracker\Models\Visit;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 
 class VisitorSyncTest extends TestCase
@@ -79,6 +81,55 @@ class VisitorSyncTest extends TestCase
         ])->assertOk();
 
         $visits = Visit::where('referer', $referer)->get();
+
+        $this->assertCount(1, $visits);
+    }
+
+    /**
+     *
+     */
+    public function testResponseVisitor(): void
+    {
+        $this->get(route('visit'))->assertOk();
+
+        $visits = Visit::where('response_code', 200)->get();
+
+        $this->assertCount(1, $visits);
+    }
+
+    /**
+     *
+     */
+    public function testErrorResponseVisitor(): void
+    {
+        Route::get('visit-error', fn() => abort(501))
+            ->middleware(['web', Tracking::class])
+            ->name('visit-error');
+
+        $this->get(route('visit-error'));
+
+        $visits = Visit::where('response_code', 501)->get();
+
+        $this->assertCount(1, $visits);
+    }
+
+    /**
+     *
+     */
+    public function testTimeResponseVisitor(): void
+    {
+        $this->get(route('visit'));
+
+        $visits = Visit::whereNull('response_time')->get();
+
+        $this->assertCount(1, $visits);
+
+
+        define('LARAVEL_START', microtime(true));
+
+        $this->get(route('visit'));
+
+        $visits = Visit::whereNotNull('response_time')->get();
 
         $this->assertCount(1, $visits);
     }
