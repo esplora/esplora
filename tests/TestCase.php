@@ -64,4 +64,18 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
             EsploraServiceProvider::class,
         ];
     }
+
+    /**
+     * Override application aliases.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Redis' => \Illuminate\Support\Facades\Redis::class,
+        ];
+    }
 }
