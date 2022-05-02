@@ -67,6 +67,31 @@ class VisitorSyncTest extends TestCase
         $visits = Visit::where('url', $route)->get();
 
         $this->assertCount(1, $visits);
+
+
+        $url = url()->to('without/name/123');
+
+        $this->get($url)->assertOk();
+
+        $visits = Visit::where('url', $url)->get();
+
+        $this->assertCount(1, $visits);
+    }
+
+    /**
+     *
+     */
+    public function testRouteVisitor(): void
+    {
+        $route = route('visit', [
+            'string' => Str::random(),
+        ]);
+
+        $this->get($route)->assertOk();
+
+        $visits = Visit::where('url', $route)->where('route', 'visit')->get();
+
+        $this->assertCount(1, $visits);
     }
 
     /**

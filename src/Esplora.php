@@ -84,6 +84,7 @@ class Esplora
         $this->save(new Visit([
             'id'                 => $this->loadVisitId(),
             'ip'                 => $request->ip(),
+            'route'              => $request->route()?->getName(),
             'referer'            => $request->headers->get('referer'),
             'user_agent'         => $request->userAgent(),
             'url'                => $request->fullUrl(),

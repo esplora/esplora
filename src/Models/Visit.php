@@ -40,6 +40,7 @@ class Visit extends Model
     protected $fillable = [
         'id',
         'url',
+        'route',
         'ip',
         'device',
         'platform',

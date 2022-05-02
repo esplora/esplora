@@ -25,6 +25,9 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
         $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(realpath('./database/migrations'));
 
+        Route::get('without/name/{string?}', fn () => '')
+            ->middleware(['web', Tracking::class]);
+
         Route::get('visit/{string?}', fn () => '')
             ->middleware(['web', Tracking::class])
             ->name('visit');

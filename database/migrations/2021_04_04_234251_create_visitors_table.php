@@ -17,6 +17,7 @@ return new class extends Migration {
                 $table->string('id');
 
                 $table->string('url')->nullable();
+                $table->string('route')->nullable();
                 $table->string('ip', 40);
 
                 $table->string('device')->nullable();             // Mobile, Desktop, Tablet, Robot
