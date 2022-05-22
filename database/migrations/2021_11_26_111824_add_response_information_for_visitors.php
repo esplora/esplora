@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::connection(config('esplora.connection'))
             ->table('esplora_visits', function (Blueprint $table) {
                 $table->integer('response_code')->nullable()->after('referer');
-                $table->integer('response_time')->nullable()->after('response_code');
+                $table->float('response_time')->nullable()->after('response_code');
             });
     }
 
