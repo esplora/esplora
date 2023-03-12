@@ -47,8 +47,8 @@ class Esplora
     public function isNeedVisitWrite($request, $response): bool
     {
         return collect(config('esplora.rules'))
-            ->map(fn (string $class)   => app()->make($class))
-            ->map(fn (Rule $rule)      => $rule->passes($request, $response))
+            ->map(fn (string $class) => app()->make($class))
+            ->map(fn (Rule $rule) => $rule->passes($request, $response))
             ->filter(fn (bool $result) => $result === false)
             ->isEmpty();
     }
@@ -166,7 +166,7 @@ class Esplora
         $values = collect()
             ->merge($redis->mGet($keys))
             ->map(fn (string $value) => json_decode($value, true, 512, JSON_THROW_ON_ERROR))
-            ->map(fn (array $value)  => collect($value)->map(fn ($attr)  => is_array($attr) ? json_encode($attr,
+            ->map(fn (array $value) => collect($value)->map(fn ($attr) => is_array($attr) ? json_encode($attr,
                 JSON_THROW_ON_ERROR) : $attr))
             ->toArray();
 
