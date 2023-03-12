@@ -38,6 +38,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::connection(config('esplora.connection'))->dropIfExists('visits');
+        Schema::connection(config('esplora.connection'))->dropIfExists('esplora_visits');
     }
 };

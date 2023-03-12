@@ -29,6 +29,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::connection(config('esplora.connection'))->dropIfExists('goals');
+        Schema::connection(config('esplora.connection'))->dropIfExists('esplora_goals');
     }
 };
