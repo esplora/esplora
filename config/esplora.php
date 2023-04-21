@@ -28,6 +28,7 @@ return [
     'rules' => [
         \Esplora\Tracker\Rules\OnlyRepresentation::class,
         \Esplora\Tracker\Rules\WeedOutDuplicates::class,
+        \Esplora\Tracker\Rules\ExceptPath::class,
         \Esplora\Tracker\Rules\WeedOutBots::class,
         \Esplora\Tracker\Rules\WeedOutFiles::class,
     ],
