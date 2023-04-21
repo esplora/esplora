@@ -18,6 +18,6 @@ class ExceptPath implements Rule
             return true;
         }
 
-        return !$request->is($except);
+        return ! $request->is($except);
     }
 }
