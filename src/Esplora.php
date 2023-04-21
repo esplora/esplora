@@ -90,7 +90,7 @@ class Esplora
             'url'                => $request->fullUrl(),
             'preferred_language' => $request->getPreferredLanguage(),
             'response_code'      => $response->getStatusCode(),
-            'response_time'      => defined('LARAVEL_START') ? microtime(true) - LARAVEL_START : null,
+            'response_time'      => defined('LARAVEL_START') ? round(microtime(true) - LARAVEL_START ) * 1000 : null,  // ms
             'created_at'         => now(),
         ]));
     }
