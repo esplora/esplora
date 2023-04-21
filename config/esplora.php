@@ -44,6 +44,8 @@ return [
 
     'except' => [
         'api/*',
+        'telescope/*',
+        'horizon/*'
     ],
 
     /*
