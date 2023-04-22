@@ -8,14 +8,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
         php: [8.2, 8.1, 8.0]
-        os: [ ubuntu-latest ]
-        redis-version: [6]
-        laravel: [ 9.* ]
-        dependency-version: [ prefer-lowest, prefer-stable ]
+        laravel: [10.*, 9.*]
+        dependency-version: [prefer-lowest, prefer-stable]
         include:
-          - laravel: [9.*, 10.*]
-            testbench: [7.*, 8.*]
+          -   laravel: 10.*
+              testbench: 8.*
+          -   laravel: 9.*
+              testbench: 7.*
+        exclude:
+          -   laravel: 10.*
+              php: 8.0
 
     name: P${{ matrix.php }} - ${{ matrix.os }} - L${{ matrix.laravel }} - ${{ matrix.dependency-version }}
 

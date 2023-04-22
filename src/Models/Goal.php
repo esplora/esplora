@@ -76,4 +76,14 @@ class Goal extends Model
     {
         return static::where('created_at', '<=', now()->subDays(config('esplora.pruning')));
     }
+
+    /**
+     * @param ...$attributes
+     *
+     * @return void
+     */
+    public function __invoke(...$attributes)
+    {
+        Goal::create($attributes);
+    }
 }

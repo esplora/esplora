@@ -101,13 +101,13 @@ class Esplora
      */
     public function goal(string $name, array $parameters = []): void
     {
-        $this->saveAfterResponse(new Goal([
+        dispatch(Goal::create([
             'id'         => Str::orderedUuid(),
             'visitor_id' => $this->loadVisitId(),
             'name'       => $name,
             'parameters' => $parameters,
             'created_at' => now(),
-        ]));
+        ]))->afterResponse();
     }
 
     /**
@@ -117,7 +117,6 @@ class Esplora
     {
         if (config('esplora.filling', 'sync') === 'sync') {
             $model->save();
-
             return;
         }
 
@@ -135,7 +134,7 @@ class Esplora
      */
     public function saveAfterResponse(Model $model): void
     {
-        dispatch(fn () => $this->save($model))->afterResponse();
+        dispatch(fn () => $model->save())->afterResponse();
     }
 
     /**
