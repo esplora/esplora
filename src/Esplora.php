@@ -117,6 +117,7 @@ class Esplora
     {
         if (config('esplora.filling', 'sync') === 'sync') {
             $model->save();
+
             return;
         }
 
