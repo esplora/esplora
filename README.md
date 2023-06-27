@@ -103,6 +103,9 @@ $schedule->command('esplora:insert')->everyTenMinutes();
 Without pruning, the `esplora_visits` and `esplora_goals` tables can accumulate records very quickly. To mitigate this, you should schedule the `model:prune` Artisan command to run daily:
 
 ```php
+use Esplora\Tracker\Models\Visit;
+use Esplora\Tracker\Models\Goal;
+
 $schedule->command('model:prune', [
     '--model' => [Visit::class, Goal::class],
 ])->daily();
