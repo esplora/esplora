@@ -54,7 +54,6 @@ class Goal extends Model
         'visitor_id' => 'string',
         'name'       => 'string',
         'parameters' => 'array',
-        'created_at' => 'timestamp',
     ];
 
     /**

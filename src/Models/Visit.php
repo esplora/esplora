@@ -64,7 +64,6 @@ class Visit extends Model
         'referer'    => 'string',
         'user_agent' => UserAgent::class,
         'url'        => 'string',
-        'created_at' => 'timestamp',
     ];
 
     protected $hidden = [
