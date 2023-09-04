@@ -8,9 +8,6 @@ use Esplora\Tracker\Models\Goal;
 
 class GoalSyncTest extends TestCase
 {
-    /**
-     *
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -19,9 +16,6 @@ class GoalSyncTest extends TestCase
         config()->set('esplora.filling', 'sync');
     }
 
-    /**
-     *
-     */
     public function testGoals(): void
     {
         $this->get('goal')->assertOk();

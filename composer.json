@@ -19,7 +19,8 @@
         "doctrine/dbal": "^3.1",
         "mockery/mockery": "^1.4.2",
         "phpunit/phpunit": "^9.0|^10.0",
-        "orchestra/testbench-core": "^7.0|^8.0"
+        "orchestra/testbench-core": "^7.0|^8.0",
+        "laravel/pint": "^1.12"
     },
     "suggest": {
         "ext-redis": "Required to use the Redis driver."

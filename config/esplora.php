@@ -45,7 +45,7 @@ return [
     'except' => [
         'api/*',
         'telescope/*',
-        'horizon/*'
+        'horizon/*',
     ],
 
     /*
@@ -71,7 +71,6 @@ return [
     */
 
     'database' => env('DB_CONNECTION', 'mysql'),
-
 
     /*
     |--------------------------------------------------------------------------
