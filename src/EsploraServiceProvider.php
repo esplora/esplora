@@ -27,12 +27,12 @@ class EsploraServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/esplora.php' => config_path('esplora.php'),
+            __DIR__.'/../config/esplora.php' => config_path('esplora.php'),
         ], 'config');
 
-        $this->mergeConfigFrom(__DIR__ . '/../config/esplora.php', 'esplora');
+        $this->mergeConfigFrom(__DIR__.'/../config/esplora.php', 'esplora');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->commands([
             EventsImport::class,

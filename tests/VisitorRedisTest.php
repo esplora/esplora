@@ -10,9 +10,6 @@ use Illuminate\Support\Str;
 
 class VisitorRedisTest extends TestCase
 {
-    /**
-     *
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -21,9 +18,6 @@ class VisitorRedisTest extends TestCase
         config()->set('esplora.filling', 'redis');
     }
 
-    /**
-     *
-     */
     public function testVisitor(): void
     {
         $this->startSession()->get('visit')->assertOk();
@@ -35,9 +29,6 @@ class VisitorRedisTest extends TestCase
         $this->assertCount(1, Visit::all());
     }
 
-    /**
-     *
-     */
     public function testIdVisitor(): void
     {
         $id = Str::orderedUuid();

@@ -12,9 +12,6 @@ use Illuminate\Support\Str;
 
 class VisitorSyncTest extends TestCase
 {
-    /**
-     *
-     */
     public function setUp(): void
     {
         parent::setUp();
@@ -23,9 +20,6 @@ class VisitorSyncTest extends TestCase
         config()->set('esplora.filling', 'sync');
     }
 
-    /**
-     *
-     */
     public function testVisitor(): void
     {
         $this->startSession()->get('visit')
@@ -34,9 +28,6 @@ class VisitorSyncTest extends TestCase
         $this->assertCount(1, Visit::all());
     }
 
-    /**
-     *
-     */
     public function testIdVisitor(): void
     {
         $id = Str::orderedUuid();
@@ -47,15 +38,11 @@ class VisitorSyncTest extends TestCase
             ->get('visit')
             ->assertOk();
 
-
         $visit = Visit::find($id);
 
         $this->assertNotNull($visit);
     }
 
-    /**
-     *
-     */
     public function testUrlVisitor(): void
     {
         $route = route('visit', [
@@ -68,7 +55,6 @@ class VisitorSyncTest extends TestCase
 
         $this->assertCount(1, $visits);
 
-
         $url = url()->to('without/name/123');
 
         $this->get($url)->assertOk();
@@ -78,9 +64,6 @@ class VisitorSyncTest extends TestCase
         $this->assertCount(1, $visits);
     }
 
-    /**
-     *
-     */
     public function testRouteVisitor(): void
     {
         $route = route('visit', [
@@ -94,9 +77,6 @@ class VisitorSyncTest extends TestCase
         $this->assertCount(1, $visits);
     }
 
-    /**
-     *
-     */
     public function testRefererVisitor(): void
     {
         $referer = 'https://orchid.software';
@@ -110,9 +90,6 @@ class VisitorSyncTest extends TestCase
         $this->assertCount(1, $visits);
     }
 
-    /**
-     *
-     */
     public function testResponseVisitor(): void
     {
         $this->get(route('visit'))->assertOk();
@@ -122,9 +99,6 @@ class VisitorSyncTest extends TestCase
         $this->assertCount(1, $visits);
     }
 
-    /**
-     *
-     */
     public function testErrorResponseVisitor(): void
     {
         Route::get('visit-error', fn () => abort(501))
@@ -138,9 +112,6 @@ class VisitorSyncTest extends TestCase
         $this->assertCount(1, $visits);
     }
 
-    /**
-     *
-     */
     public function testRedirectResponseVisitor(): void
     {
         Route::get('visit-redirect', fn () => response()->redirectTo('/redirect'))
@@ -154,9 +125,6 @@ class VisitorSyncTest extends TestCase
         $this->assertCount(1, $visits);
     }
 
-    /**
-     *
-     */
     public function testTimeResponseVisitor(): void
     {
         $this->get(route('visit'));
@@ -164,7 +132,6 @@ class VisitorSyncTest extends TestCase
         $visits = Visit::whereNull('response_time')->get();
 
         $this->assertCount(1, $visits);
-
 
         define('LARAVEL_START', microtime(true));
 
